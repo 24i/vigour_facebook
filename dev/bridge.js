@@ -1,9 +1,9 @@
-var Bridge = require('vigour-wrapper/lib/bridge')
+var bridge = require('vigour-wrapper/lib/bridge')
 
 var fakeMethods = {
   init () {
     setTimeout(() => {
-      devBridge.ready(null, true, 'Facebook')
+      bridge.ready(null, true, 'Facebook')
     })
   },
   login (callback) {
@@ -35,13 +35,9 @@ var fakeMethods = {
   }
 }
 
-var devBridge = module.exports = new Bridge({
-  define: {
-    send (pluginId, fnName, opts, cb) {
-      if (pluginId !== 'Facebook') {
-        throw new Error('this is for fake Facebook ya bum!')
-      }
-      return fakeMethods[fnName](opts, cb)
-    }
+bridge.send = function send (pluginId, fnName, opts, cb) {
+  if (pluginId !== 'Facebook') {
+    throw new Error('this is for fake Facebook ya bum!')
   }
-})
+  return fakeMethods[fnName](opts, cb)
+}

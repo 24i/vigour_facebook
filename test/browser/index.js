@@ -1,4 +1,6 @@
 'use strict'
-
-require('./web')
-require('./native')
+describe('Facebook', function () {
+  require('./web')
+  require('./mocknative')
+  require('./native')
+})
