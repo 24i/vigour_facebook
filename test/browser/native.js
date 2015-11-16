@@ -15,7 +15,9 @@ describe('Native Plugin', function () {
   }).Constructor
   console.log('haha', Facebook)
   var facebook
-
+  // fire ready
+  // login
+  // share
   it('should be able to create a plugin instance', function (done) {
     facebook = new Facebook()
   })
