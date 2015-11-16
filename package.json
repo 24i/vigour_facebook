@@ -21,7 +21,7 @@
   "author": "Vigour",
   "contributors": [
     "Shawn Inder <shawn@vigour.io>",
-    "Marcus Besjes <marcus@vigour.io>",
+    "Marcus Besjes <marcus@vigour.io>"
   ],
   "license": "ISC",
   "bugs": {
@@ -38,7 +38,7 @@
     "gaston": "^0.14.0"
   },
   "vigour": {
-    
+
   },
   "standard": {
     "globals": [ "describe", "it", "expect", "before", "after", "beforeEach", "afterEach", "sinon" ]

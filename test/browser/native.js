@@ -13,6 +13,7 @@ describe('Native Plugin', function () {
       useVal: devBridge
     }
   }).Constructor
+  console.log('haha', Facebook)
   var facebook
 
   it('should be able to create a plugin instance', function (done) {
