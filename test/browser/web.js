@@ -10,12 +10,14 @@ describe('Web', function () {
   }).Constructor
   var facebook
   it('should be able to create a plugin instance', function () {
-    facebook = new Facebook()
+    facebook = new Facebook({appId: '1224035690956856'})
+    window.fb = facebook
   })
 
   describe('API', function () {
     it('should be able to log in', function () {
-      // facebook.login()
+      facebook.login()
+
     })
 
     it('should be able to share in', function () {

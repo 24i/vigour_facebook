@@ -35,12 +35,13 @@
     "vigour-wrapper": "*"
   },
   "devDependencies": {
-    "gaston": "^0.14.0"
+    "gaston": "^0.14.0",
+    "vigour-element": "*"
   },
   "vigour": {
 
   },
   "standard": {
-    "globals": [ "describe", "it", "expect", "before", "after", "beforeEach", "afterEach", "sinon" ]
+    "globals": [ "describe", "it", "expect", "before", "after", "beforeEach", "afterEach", "sinon", "FB" ]
   }
 }

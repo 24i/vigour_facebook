@@ -35,9 +35,15 @@ var fakeMethods = {
   }
 }
 
+var _send = bridge.send
 bridge.send = function send (pluginId, fnName, opts, cb) {
-  if (pluginId !== 'Facebook') {
-    throw new Error('this is for fake Facebook ya bum!')
+  if (pluginId) {
+    if (pluginId !== 'Facebook') {
+      throw new Error('this is for fake Facebook ya bum! not ' + pluginId)
+    }
+    return fakeMethods[fnName](opts, cb)
+  } else {
+    return _send.apply(bridge, arguments)
   }
-  return fakeMethods[fnName](opts, cb)
+
 }
