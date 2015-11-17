@@ -1,8 +1,14 @@
 'use strict'
 
 require('./style.less')
-var uikit = require('vigour-uikit')
-var Element = uikit.Element
+var Element = require('vigour-element')
+Element.prototype.inject(
+  require('vigour-element/lib/property/text'),
+  require('vigour-element/lib/property/transform'),
+  require('vigour-element/lib/property/css'),
+  require('vigour-element/lib/property/attributes'),
+  require('vigour-element/lib/events/render')
+)
 var Facebook = require('../lib/')
 
 var plain = require('vigour-js/lib/methods/plain')
@@ -12,28 +18,23 @@ var facebook = window.fb = new Facebook({
   appId: '1224035690956856'
 })
 
-var TopBar = new uikit.Topbar({
-  css: 'topbar',
-  header: new uikit.Header[2]()
-}).Constructor
-
 var ShareInput = new Element({
   css: 'input-group',
-  label: new uikit.Label({
+  label: {
     node: 'span'
-  }),
-  message: new uikit.Input({
+  },
+  message: {
     node: 'input'
-  })
+  }
 }).Constructor
 
 var app = new Element({
   node: document.body,
-  topbar: new TopBar({
+  topbar: {
     header: {
       text: 'Facebook example app'
     }
-  }),
+  },
   state: {
     text: JSON.stringify(facebook.plain(), false, 2)
   },
@@ -73,7 +74,7 @@ var app = new Element({
         }
       }
     }),
-    validate: new uikit.Button({
+    validate: {
       node: 'button',
       text: 'Share',
       on: {
@@ -89,8 +90,8 @@ var app = new Element({
           })
         }
       }
-    }),
-    reset: new uikit.Button({
+    },
+    reset: {
       node: 'button',
       text: 'Reset',
       on: {
@@ -98,7 +99,7 @@ var app = new Element({
           app.sharing.message.message.input.node.value = ''
         }
       }
-    })
+    }
   }
 })
 
