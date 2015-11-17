@@ -2,35 +2,88 @@
 
 ### JS API
 
+```javascript
+var Facebook = require('vigour-facebook')
+
+var facebook = new Facebook({
+	appId: 'APP_ID'
+})
+```
+
 #### Methods
 
-##### login
+##### login(callback)
+
+```javascript
+facebook.login((err, response) => {
+  console.log('login callback!', response)
+  console.log('success?', facebook.token.val)
+})
+```
+
 Log in with facebook, through:
 1. native facebook app.
 2. separate browser window in native browser app.
 
-When successful, should set `Facebook.token.val` to `token`.
+On `response`:
+- __property management__
+  - sets `facebook.connectionStatus` to `response.status`
+  - When successfully logged in, sets:
+    - `facebook.token.val` to `response.authResponse.accessToken`.
+    - `facebook.userID.val` to `response.authResponse.userID`
+- calls `callback` (if provided) with parameters:
+  - `error`
+  - `response`
 
-###### parameters:
-- possibly `callback`
+`response` looks something like
 
-###### callback parameters:
-If callback is provided, it should be called with the following parameters:
-- `error`
-- `token`
+```JSON
+{
+  "authResponse": {
+    "accessToken": "BLABLATOKEN",
+    "userID": "1716047381960811",
+    "expiresIn": 6090,
+    "signedRequest": "BIGHASH"
+  },
+  "status": "connected"
+}
+```
 
-##### share
-Sharing on facebook to own wall or a friend's wall.
+##### logout(callback)
+```javascript
+facebook.logout((err, response) => {
+  console.log('logout callback!')
+})
+console.log(facebook.token.val) // logs false
+```
+Logs the user out of facebook
 
-###### parameters:
-- `url` to share
-- preset `text`
-- possibly `callback`
+immediately does:
+- __property management__
+  - `facebook.token.val = false`
+  - `facebook.userID.val = false`
+  - `facebook.connectionStatus.val = 'unknown'`
 
-###### callback parameters:
-If callback is provided, it should be called with the following parameters:
-- `error`
-- `token`
+On `response`
+- calls `callback` (if provided) with arguments
+  - `error`
+  - `response`
+
+
+
+##### share(link, callback)
+
+Sharing a link on facebook!
+
+```javascript
+facebook.share(urlString, (err, response) => {
+  if (response.error_message) {
+    console.log('cancelled share?', response.error_message)
+  } else {
+    console.log('yay shared', urlString)
+  }
+})
+```
 
 #### Properties
 
@@ -40,30 +93,31 @@ This property is based on the ready event from native, or the SDK initialized on
 ##### token
 This property should be managed by the JS API based on the result of the native login method.
 
+##### connectionStatus
+Updated as soon as the status is knows, (i.e. when loginStatus is known)
+
+##### userID
+Just for fun, we store the facebook userID.
+
+
 ### Native
 
 #### Methods
 
-##### login
-The native side should launch the facebook app if available, otherwise the browser app with the facebook login page etc.
+##### init(appId)
 
-###### parameters:
-- callback
+##### login(scope, callback)
+In the JS interface, `scope` is assumed to be part of the app config, but for optimal flexibility of the Plugin methods, we want to be able to pass `scope` here.
 
-###### callback parameters:
-- `error`
-- `token`
+##### logout(callback)
+Same as JS, except no __property management__.
 
-##### share
+##### share(url, callback)
+Same as JS, except no __property management__.
 
-###### parameters:
-- `url` to share
-- preset `text`
-- `callback`
-
-###### callback parameters:
-- `error`
 
 #### Events
 
-##### ready
+##### loginState
+Once the Plugin is initialized, it should check it's current status (was the user logged in with facebook when he/she closed the app).
+Once this is know, it should emit the `loginState` event passing a `response` Object similar to the `response` of the `facebook.login` method.
