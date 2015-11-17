@@ -37,10 +37,12 @@
     "node": ">=4.1.2"
   },
   "dependencies": {
+    "vigour-ua": "0.0.1",
     "vigour-wrapper": "*"
   },
   "devDependencies": {
-    "vigour-element": "*"
+    "vigour-element": "*",
+    "vigour-uikit": "0.0.7"
   },
   "license": "MIT",
   "vigour": {
