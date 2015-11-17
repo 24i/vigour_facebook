@@ -104,8 +104,20 @@ Just for fun, we store the facebook userID.
 
 #### Methods
 
-Basically the methods expected on the native side are the same in terms of arguments and callback parameters. The only difference is that __property management__ is done on the JS side, so native methods only deal with callbacks and events.
+##### init(appId)
+
+##### login(scope, callback)
+In the JS interface, `scope` is assumed to be part of the app config, but for optimal flexibility of the Plugin methods, we want to be able to pass `scope` here.
+
+##### logout(callback)
+Same as JS, except no __property management__.
+
+##### share(url, callback)
+Same as JS, except no __property management__.
+
 
 #### Events
 
-No events are needed for Facebooks
+##### loginState
+Once the Plugin is initialized, it should check it's current status (was the user logged in with facebook when he/she closed the app).
+Once this is know, it should emit the `loginState` event passing a `response` Object similar to the `response` of the `facebook.login` method.
