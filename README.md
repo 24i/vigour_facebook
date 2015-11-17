@@ -1,4 +1,22 @@
-## Facebook
+# Facebook
+
+## Install
+- `npm i vigour-facebook`
+
+## Updates via upstream remote
+- `git remote add skeleton git@github.com:vigour-io/plugin.git`
+- `git pull skeleton develop`
+
+## Try it out
+- `npm run ios`
+- `npm run android`
+- `npm run all`
+
+## Usage
+See [tests](test)
+
+## Building native apps
+See [wrapper](http://github.com/vigour-io/vigour-native)
 
 ### JS API
 

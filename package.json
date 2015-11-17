@@ -4,8 +4,12 @@
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/gaston",
-    "test": "./node_modules/.bin/gaston test browser"
+    "start": "gaston",
+    "test": "gaston test -r browser",
+    "build": "gaston build -s ./example/index.js -o ./ -i",
+    "ios": "npm run build && vNative build --native '{\"selectedPlatforms\":\"ios\"}'",
+    "android": "npm run build && vNative build --native '{\"selectedPlatforms\":\"android\"}'",
+    "all": "npm run build && vNative build"
   },
   "repository": {
     "type": "git",
@@ -21,27 +25,73 @@
   "author": "Vigour",
   "contributors": [
     "Shawn Inder <shawn@vigour.io>",
-    "Marcus Besjes <marcus@vigour.io>"
+    "Marcus Besjes <marcus@vigour.io>",
+    "Michiel Van Liempt <michiel@vigour.io>",
+    "Alexander van de Werff <alex@vigour.io>"
   ],
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/vigour-io/facebook/issues"
   },
   "homepage": "https://github.com/vigour-io/facebook",
   "engines": {
-    "node": ">=0.12"
+    "node": ">=4.1.2"
   },
   "dependencies": {
     "vigour-wrapper": "*"
   },
   "devDependencies": {
-    "gaston": "^0.14.0",
     "vigour-element": "*"
   },
+  "license": "MIT",
   "vigour": {
-
+    "plugin": {
+      "android": {
+        "skipInstall": true,
+        "className": "io.vigour.facebook",
+        "instantiation": "new Facebook(this, webview)"
+      }
+    },
+    "native": {
+      "platforms": {
+        "ios": {
+          "productName": "Facebook Example",
+          "organizationName": "Vigour",
+          "organizationIdentifier": "io.vigour.facebook",
+          "buildNumber": "1",
+          "appIndexPath": "build.html",
+          "NSAllowsArbitraryLoads": true,
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        },
+        "android": {
+          "productName": "Facebook Example",
+          "applicationId": "io.vigour.facebook",
+          "appIndexPath": "build.html",
+          "keystoreFile": "example.keystore",
+          "keystorePassword": "shmexample",
+          "keystoreAlias": "blabla",
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        }
+      }
+    }
   },
   "standard": {
-    "globals": [ "describe", "it", "expect", "before", "after", "beforeEach", "afterEach", "sinon", "FB" ]
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach",
+      "sinon"
+    ]
   }
 }
