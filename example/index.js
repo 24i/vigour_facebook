@@ -44,7 +44,7 @@ var app = new Element({
       click () {
         console.log('Login clicked!')
         facebook.login((err, response) => {
-          console.log('LOGIN CALLBACK!', err ? err : '')
+          console.log('---- login callback!', err ? err : '')
           console.log('response', response)
           console.log('facebook.token.val', facebook.token.val)
         })
@@ -57,16 +57,19 @@ var app = new Element({
     on: {
       click () {
         facebook.logout(() => {
-          console.log('LOGOUT DONE!')
+          console.log('---- LOGOUT DONE!')
         })
       }
     }
   },
   sharing: {
     message: new ShareInput({
+      message: {
+        text: 'http://www.google.com'
+      },
       label: {
         text: {
-          val: 'write a Message:'
+          val: 'write a link to share:'
         }
       }
     }),
@@ -77,9 +80,9 @@ var app = new Element({
         click () {
           var message = app.sharing.message.message.input.node.value
           console.log('lol share that', message)
-          facebook.share(message, function (err) {
+          facebook.share(message, function (err, response) {
             if (!err) {
-              console.log('---- shared dat!!', err)
+              console.log('---- shared dat!!', response)
             } else {
               console.error('SHARE ERROR', err)
             }
