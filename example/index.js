@@ -15,7 +15,7 @@ var plain = require('vigour-js/lib/methods/plain')
 Object.getPrototypeOf(Facebook.prototype).inject(plain)
 
 var facebook = window.fb = new Facebook({
-  appId: '1224035690956856'
+  appId: '1524010964586788'
 })
 
 var ShareInput = new Element({
