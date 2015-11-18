@@ -79,7 +79,7 @@ var app = new Element({
       text: 'Share',
       on: {
         click () {
-          var message = app.sharing.message.message.input.node.value
+          var message = app.sharing.message.message.node.value
           console.log('lol share that', message)
           facebook.share(message, function (err, response) {
             if (!err) {
@@ -96,7 +96,7 @@ var app = new Element({
       text: 'Reset',
       on: {
         click () {
-          app.sharing.message.message.input.node.value = ''
+          app.sharing.message.message.node.value = ''
         }
       }
     }
