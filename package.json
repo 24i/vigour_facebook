@@ -82,6 +82,9 @@
           }
         }
       }
+    },
+    "facebook": {
+      "appId": "1224035690956856"
     }
   },
   "standard": {
@@ -93,7 +96,11 @@
       "after",
       "beforeEach",
       "afterEach",
-      "sinon"
+      "sinon",
+      "FB"
     ]
+  },
+  "gaston": {
+    "package": true
   }
 }
