@@ -9,14 +9,42 @@ Element.prototype.inject(
   require('vigour-element/lib/property/attributes'),
   require('vigour-element/lib/events/render')
 )
+
+// require facebook
 var Facebook = require('../lib/')
 
 var plain = require('vigour-js/lib/methods/plain')
 Object.getPrototypeOf(Facebook.prototype).inject(plain)
 
+// create facebook instance
+
+/*
+
+This will read appId from your package.json (pkg.vigour.facebook.appId):
+
+var facebook = new Facebook()
+
+This is the promoted way. For dev purposes you can set the appId and other settings when instantiating:
+
+These are some appId's you can used for web based on domain:
+
+'1523998237921394' // localhost:8081
+'1524010964586788' // localhost:8085
+'1523994961255055' // 192.168.1.23:8081
+
+*/
+
 var facebook = window.fb = new Facebook({
-  appId: '1224035690956856'
+  appId: '1523998237921394' // localhost:8081
 })
+
+/*
+
+It's advised to
+
+var facebook = new Facebook()
+
+*/
 
 var ShareInput = new Element({
   css: 'input-group',
@@ -79,7 +107,7 @@ var app = new Element({
       text: 'Share',
       on: {
         click () {
-          var message = app.sharing.message.message.input.node.value
+          var message = app.sharing.message.message.node.value
           console.log('lol share that', message)
           facebook.share(message, function (err, response) {
             if (!err) {
@@ -96,7 +124,7 @@ var app = new Element({
       text: 'Reset',
       on: {
         click () {
-          app.sharing.message.message.input.node.value = ''
+          app.sharing.message.message.node.value = ''
         }
       }
     }

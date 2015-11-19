@@ -4,43 +4,33 @@ var Plugin = require('vigour-wrapper/lib/bridge/plugin')
 
 var devBridge = require('../../dev/bridge')
 var shared = require('../../lib/shared')
-var native = require('../../lib/native')
+var FacebookNative = require('../../lib/native')
 
 describe('Mock Native', function () {
-  var Facebook = new Plugin({
-    inject: [shared, native],
-    bridge: {
-      useVal: devBridge
-    }
-  }).Constructor
-
   var facebook
   // fire ready
   // login
   // share
   it('should be able to create a plugin instance', function () {
-    facebook = new Facebook()
+    facebook = new FacebookNative()
   })
 
   describe('API', function () {
     it('should be able to log in', function (done) {
-      facebook.login(function (err, token) {
+      facebook.login(function (err, response) {
+        console.log('login callback!?', err, response)
         if (err) {
           throw err
         }
-        console.log('got token!', token)
-        console.log('facebook.token', facebook.token && facebook.token.val)
         done()
       })
     })
 
     it('should be able to share', function (done) {
-      facebook.login(function (err, token) {
+      facebook.login(function (err) {
         if (err) {
           throw err
         }
-        console.log('got token!', token)
-        console.log('facebook.token', facebook.token && facebook.token.val)
         done()
       })
     })

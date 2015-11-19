@@ -1,9 +1,8 @@
 {
+  "name": "something",
   "vigour": {
-    "wrapper": {
-      "ios": {
-        "appId": "1224035690956856"
-      }
+    "facebook": {
+      "appId": "1224035690956856"
     }
   }
 }
