@@ -41,8 +41,7 @@
     "vigour-wrapper": "*"
   },
   "devDependencies": {
-    "vigour-element": "*",
-    "vigour-uikit": "0.0.7"
+    "vigour-element": "*"
   },
   "license": "MIT",
   "vigour": {
