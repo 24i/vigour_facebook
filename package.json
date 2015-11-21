@@ -41,8 +41,7 @@
     "vigour-wrapper": "*"
   },
   "devDependencies": {
-    "vigour-element": "*",
-    "vigour-uikit": "0.0.7"
+    "vigour-element": "*"
   },
   "license": "MIT",
   "vigour": {
@@ -82,6 +81,9 @@
           }
         }
       }
+    },
+    "facebook": {
+      "appId": "1224035690956856"
     }
   },
   "standard": {
@@ -93,7 +95,8 @@
       "after",
       "beforeEach",
       "afterEach",
-      "sinon"
+      "sinon",
+      "FB"
     ]
   }
 }
