@@ -1,5 +1,6 @@
 package io.vigour.plugin.example;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
@@ -18,20 +19,22 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         plugin = new FacebookPlugin(this);
-        plugin.init("whatever1234");
+        feedback(plugin.init("whatever1234"));
 
-        ButterKnife.bind(this);
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //plugin.onActivityResult(requestCode, resultCode, data);
+        plugin.callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @OnClick(R.id.login)
     public void login() {
         feedback(plugin.login(""));
-    }
-
-    private void feedback(String message) {
-        outputView.setText(message);
     }
 
     @OnClick(R.id.logout)
@@ -42,5 +45,12 @@ public class MainActivity extends ActionBarActivity {
     @OnClick(R.id.share)
     public void log() {
         feedback(plugin.share("vigour.io"));
+    }
+
+    @OnClick(R.id.token)
+    public void token() { feedback(plugin.getToken());}
+
+    private void feedback(String message) {
+        outputView.setText(message);
     }
 }
