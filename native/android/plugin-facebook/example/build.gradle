@@ -22,6 +22,6 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:23.0.+'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'io.vigour:plugin-core:+'
+    compile 'io.vigour:plugin-core:0.5.1'
     compile project(':plugin-facebook')
 }

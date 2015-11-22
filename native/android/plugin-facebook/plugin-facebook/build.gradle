@@ -1,31 +1,5 @@
 apply plugin: 'com.android.library'
 
-android {
-    compileSdkVersion 21
-    buildToolsVersion "22.0.1"
-
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 21
-        versionCode 1
-        versionName "0.1"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    packagingOptions {
-        exclude 'META-INF/LICENSE'
-    }
-}
-
-dependencies {
-    compile 'io.vigour:plugin-core:0.4.1'
-    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
-}
-
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'plugin-facebook'
@@ -39,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/vigour-io/facebook'
     gitUrl = 'https://github.com/vigour-io/facebook.git'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.1.0'
 
     developerId = 'vigour'
     developerName = 'Michiel van Liempt'
@@ -49,6 +23,34 @@ ext {
     licenseUrl = 'http://opensource.org/licenses/mit-license.php'
     allLicenses = ["MIT"]
 }
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode 4
+        versionName libraryVersion
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+dependencies {
+    compile 'io.vigour:plugin-core:0.5.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+}
+
+
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
