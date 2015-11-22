@@ -2,7 +2,7 @@ package io.vigour.plugin.example;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.vigour.plugin.facebook.FacebookPlugin;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
 
     FacebookPlugin plugin;
     @Bind(R.id.output) TextView outputView;
@@ -28,8 +28,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //plugin.onActivityResult(requestCode, resultCode, data);
-        plugin.callbackManager.onActivityResult(requestCode, resultCode, data);
+        plugin.onActivityResult(requestCode, resultCode, data);
     }
 
     @OnClick(R.id.login)
