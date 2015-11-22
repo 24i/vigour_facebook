@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
         versionName "0.1"
@@ -22,9 +22,8 @@ android {
 }
 
 dependencies {
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'io.vigour:plugin-core:0.4.1'
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
 }
 
 ext {

@@ -6,5 +6,5 @@ mocha.css
 mocha.js
 test-runner.html
 bundles
-build.*
 build
+/build.*
