@@ -1,6 +1,7 @@
 package io.vigour.plugin.facebook;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -21,7 +22,7 @@ import io.vigour.nativewrapper.plugin.core.Plugin;
 /**
  * Created by michielvanliempt on 21/11/15.
  */
-public class FacebookPlugin extends Plugin {
+public class FacebookPlugin extends Plugin implements ActivityResultListener {
     private static final String NAME = "facebook";
     Activity activity;
     private LoginManager loginManager;
@@ -87,7 +88,8 @@ public class FacebookPlugin extends Plugin {
         return status + "\n" + String.format("%s %s %s", token.getToken(), token.getApplicationId(), token.getUserId());
     }
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        callbackManager.onActivityResult(requestCode, resultCode, data);
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
 }
