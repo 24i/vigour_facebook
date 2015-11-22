@@ -64,7 +64,7 @@ var app = new Element({
     }
   },
   state: {
-    text: JSON.stringify(facebook.plain(), false, 2)
+    // text: JSON.stringify(facebook.plain(), false, 2)
   },
   loginButton: {
     node: 'button',
@@ -107,7 +107,7 @@ var app = new Element({
       text: 'Share',
       on: {
         click () {
-          var message = app.sharing.message.message.node.value
+          var message = { urlString: app.sharing.message.message.node.value }
           console.log('lol share that', message)
           facebook.share(message, function (err, response) {
             if (!err) {
@@ -151,5 +151,5 @@ facebook.token.on(() => {
 })
 
 function writeStatus () {
-  app.state.text.val = JSON.stringify(facebook.plain(), false, 2)
+  // app.state.text.val = JSON.stringify(facebook.plain(), false, 2)
 }
