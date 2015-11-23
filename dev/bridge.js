@@ -1,13 +1,16 @@
 'use strict'
 
 var bridge = require('vigour-wrapper/lib/bridge')
+// var pkg = require('../package.json')
+// var _pluginId = pkg.name
+var _pluginId = 'vigour-facebook'
 
 // Mutate the bridge to call these fake native methods:
 
 var fakeMethods = {
   init () {
     setTimeout(() => {
-      bridge.ready(null, true, 'Facebook')
+      bridge.ready(null, true, _pluginId)
     })
   },
   login (callback) {
@@ -47,12 +50,11 @@ var fakeMethods = {
 var _send = bridge.send
 bridge.send = function send (pluginId, fnName, opts, cb) {
   if (pluginId) {
-    if (pluginId !== 'Facebook') {
+    if (pluginId !== _pluginId) {
       throw new Error('this is for fake Facebook ya bum! not ' + pluginId)
     }
     return fakeMethods[fnName](opts, cb)
   } else {
     return _send.apply(bridge, arguments)
   }
-
 }
