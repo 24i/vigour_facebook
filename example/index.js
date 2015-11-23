@@ -13,6 +13,10 @@ Element.prototype.inject(
 // require facebook
 var Facebook = require('../lib/')
 
+var Observable = require('vigour-js/lib/observable')
+
+Observable.prototype.inject(require('vigour-js/lib/methods/plain'))
+
 // create facebook instance
 
 /*
@@ -61,13 +65,13 @@ var app = new Element({
     }
   },
   state: {
-    text: JSON.stringify(getPlain(facebook), false, 2)
+    text: JSON.stringify(fb.plain(), false, 2)
   },
   loginButton: {
     node: 'button',
     text: 'Login',
     on: {
-      click () {
+      click() {
         console.log('Login clicked!')
         facebook.login((err, response) => {
           console.log('---- login callback!', err ? err : '')
@@ -81,7 +85,7 @@ var app = new Element({
     node: 'button',
     text: 'Logout',
     on: {
-      click () {
+      click() {
         facebook.logout(() => {
           console.log('---- LOGOUT DONE!')
         })
@@ -103,7 +107,7 @@ var app = new Element({
       node: 'button',
       text: 'Share',
       on: {
-        click () {
+        click() {
           var message = app.sharing.message.message.node.value
           console.log('lol share that', message)
           facebook.share(message, function (err, response) {
@@ -120,7 +124,7 @@ var app = new Element({
       node: 'button',
       text: 'Reset',
       on: {
-        click () {
+        click() {
           app.sharing.message.message.node.value = ''
         }
       }
@@ -148,12 +152,5 @@ facebook.token.on(() => {
 })
 
 function writeStatus () {
-  app.state.text.val = JSON.stringify(getPlain(facebook), false, 2)
-}
-
-// The following is a workaround for this bug: https://github.com/vigour-io/vjs/issues/239
-function getPlain (fb) {
-  var plain = fb.plain()
-  delete plain.bridge
-  return plain
+  app.state.text.val = JSON.stringify(fb.plain(), false, 2)
 }
