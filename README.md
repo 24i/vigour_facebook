@@ -40,6 +40,7 @@ facebook.login((err, response) => {
 ```
 
 Log in with facebook, through:
+
 1. native facebook app.
 2. separate browser window in native browser app.
 

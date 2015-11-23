@@ -1,15 +1,15 @@
 {
   "name": "vigour-facebook",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
     "start": "gaston",
     "test": "gaston test -r browser",
     "build": "gaston build -s ./example/index.js -o ./ -i",
-    "ios": "npm run build && vNative build --native '{\"selectedPlatforms\":\"ios\"}'",
-    "android": "npm run build && vNative build --native '{\"selectedPlatforms\":\"android\"}'",
-    "all": "npm run build && vNative build"
+    "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
+    "android": "npm run build && wrapper build --native.selectedPlatforms android",
+    "all": "npm run build && wrapper build"
   },
   "repository": {
     "type": "git",
@@ -41,16 +41,28 @@
     "vigour-wrapper": "*"
   },
   "devDependencies": {
-    "vigour-element": "*",
-    "vigour-uikit": "0.0.7"
+    "vigour-element": "*"
   },
   "license": "MIT",
+  "gaston": {
+    "package": true
+  },
   "vigour": {
     "plugin": {
       "android": {
-        "skipInstall": true,
-        "className": "io.vigour.facebook",
-        "instantiation": "new Facebook(this, webview)"
+        "className": "io.vigour.plugin.facebook.FacebookPlugin",
+        "instantiation": "new FacebookPlugin(this)",
+        "metadata": {
+          "android:name": "com.facebook.sdk.ApplicationId",
+          "android:value": "@string/facebook_app_id"},
+        "activity": {
+          "android:name": "com.facebook.FacebookActivity",
+          "android:configChanges": "keyboard|keyboardHidden|screenLayout|screenSize|orientation",
+          "android:theme": "@android:style/Theme.Translucent.NoTitleBar",
+          "android:label": "@string/app_name"},
+        "strings": {
+          "facebook_app_id": "1523994961255055"
+        }
       }
     },
     "native": {
@@ -93,7 +105,8 @@
       "after",
       "beforeEach",
       "afterEach",
-      "sinon"
+      "sinon",
+      "FB"
     ]
   }
 }

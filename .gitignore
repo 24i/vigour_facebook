@@ -7,3 +7,4 @@ mocha.js
 test-runner.html
 bundles
 build
+/build.*

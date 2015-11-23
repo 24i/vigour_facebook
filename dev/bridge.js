@@ -1,4 +1,8 @@
+'use strict'
+
 var bridge = require('vigour-wrapper/lib/bridge')
+
+// Mutate the bridge to call these fake native methods:
 
 var fakeMethods = {
   init () {
@@ -12,8 +16,13 @@ var fakeMethods = {
     setTimeout(() => {
       if (!window.facebookFail) {
         // got a token!
-        var token = 'someToken'
-        callback(null, token)
+        var response = {
+          status: 'connected',
+          authResponse: {
+            accessToken: 'someToken'
+          }
+        }
+        callback(null, response)
       } else {
         // failed!
         callback('failed to get token!')
