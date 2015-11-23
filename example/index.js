@@ -14,7 +14,8 @@ Element.prototype.inject(
 var Facebook = require('../lib/')
 
 var plain = require('vigour-js/lib/methods/plain')
-Object.getPrototypeOf(Facebook.prototype).inject(plain)
+var Observable = require('vigour-js/lib/observable')
+Observable.prototype.inject(plain)
 
 // create facebook instance
 
@@ -70,7 +71,7 @@ var app = new Element({
     node: 'button',
     text: 'Login',
     on: {
-      click () {
+      click() {
         console.log('Login clicked!')
         facebook.login((err, response) => {
           console.log('---- login callback!', err ? err : '')
@@ -84,7 +85,7 @@ var app = new Element({
     node: 'button',
     text: 'Logout',
     on: {
-      click () {
+      click() {
         facebook.logout(() => {
           console.log('---- LOGOUT DONE!')
         })
@@ -106,7 +107,7 @@ var app = new Element({
       node: 'button',
       text: 'Share',
       on: {
-        click () {
+        click() {
           var message = app.sharing.message.message.node.value
           console.log('lol share that', message)
           facebook.share(message, function (err, response) {
@@ -123,7 +124,7 @@ var app = new Element({
       node: 'button',
       text: 'Reset',
       on: {
-        click () {
+        click() {
           app.sharing.message.message.node.value = ''
         }
       }
