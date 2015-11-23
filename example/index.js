@@ -64,7 +64,7 @@ var app = new Element({
     }
   },
   state: {
-    // text: JSON.stringify(facebook.plain(), false, 2)
+    text: JSON.stringify(facebook.plain(), false, 2)
   },
   loginButton: {
     node: 'button',
@@ -151,5 +151,5 @@ facebook.token.on(() => {
 })
 
 function writeStatus () {
-  // app.state.text.val = JSON.stringify(facebook.plain(), false, 2)
+  app.state.text.val = JSON.stringify(facebook.plain(), false, 2)
 }
