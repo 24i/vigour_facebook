@@ -13,9 +13,6 @@ Element.prototype.inject(
 // require facebook
 var Facebook = require('../lib/')
 
-var plain = require('vigour-js/lib/methods/plain')
-Object.getPrototypeOf(Facebook.prototype).inject(plain)
-
 // create facebook instance
 
 /*
@@ -64,7 +61,7 @@ var app = new Element({
     }
   },
   state: {
-    text: JSON.stringify(facebook.plain(), false, 2)
+    text: JSON.stringify(getPlain(facebook), false, 2)
   },
   loginButton: {
     node: 'button',
@@ -151,5 +148,12 @@ facebook.token.on(() => {
 })
 
 function writeStatus () {
-  app.state.text.val = JSON.stringify(facebook.plain(), false, 2)
+  app.state.text.val = JSON.stringify(getPlain(facebook), false, 2)
+}
+
+// The following is a workaround for this bug: https://github.com/vigour-io/vjs/issues/239
+function getPlain (fb) {
+  var plain = fb.plain()
+  delete plain.bridge
+  return plain
 }
