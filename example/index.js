@@ -13,9 +13,10 @@ Element.prototype.inject(
 // require facebook
 var Facebook = require('../lib/')
 
+// inject plain
+var plain = require('vigour-js/lib/methods/plain')
 var Observable = require('vigour-js/lib/observable')
-
-Observable.prototype.inject(require('vigour-js/lib/methods/plain'))
+Observable.prototype.inject(plain)
 
 // create facebook instance
 
