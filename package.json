@@ -45,7 +45,7 @@
   },
   "license": "MIT",
   "gaston": {
-    "package": true
+    "package": false
   },
   "vigour": {
     "plugin": {
