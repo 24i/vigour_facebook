@@ -61,7 +61,7 @@
           "android:theme": "@android:style/Theme.Translucent.NoTitleBar",
           "android:label": "@string/app_name"},
         "strings": {
-          "facebook_app_id": "1523994961255055"
+          "facebook_app_id": "fill in facebook key here"
         }
       }
     },

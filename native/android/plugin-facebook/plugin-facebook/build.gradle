@@ -46,7 +46,8 @@ android {
 }
 
 dependencies {
-    compile 'io.vigour:plugin-core:0.5.1'
+    compile 'io.vigour:plugin-core:0.5.2'
+    compile 'com.fasterxml.jackson.jr:jackson-jr-objects:2.6.3'
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
 }
 

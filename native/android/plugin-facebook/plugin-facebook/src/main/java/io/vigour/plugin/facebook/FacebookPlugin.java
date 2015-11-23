@@ -1,7 +1,6 @@
 package io.vigour.plugin.facebook;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -14,9 +13,12 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.fasterxml.jackson.jr.ob.JSON;
 
+import java.io.IOException;
 import java.util.Arrays;
 
+import io.vigour.nativewrapper.plugin.core.ActivityResultListener;
 import io.vigour.nativewrapper.plugin.core.Plugin;
 
 /**
@@ -27,7 +29,7 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
     Activity activity;
     private LoginManager loginManager;
     public CallbackManager callbackManager;
-    String status = "";
+    FacebookStatus status;
 
     public FacebookPlugin(Activity context) {
         super(NAME);
@@ -44,21 +46,57 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
                                                     new FacebookCallback<LoginResult>() {
                                                         @Override
                                                         public void onSuccess(LoginResult loginResult) {
-                                                            status = "success " + loginResult.getAccessToken();
+                                                            AccessToken token = loginResult.getAccessToken();
+                                                            update(token);
                                                         }
 
                                                         @Override
                                                         public void onCancel() {
-                                                            status = "cancelled ";
+                                                            update(null);
                                                         }
 
                                                         @Override
                                                         public void onError(FacebookException exception) {
-                                                            status = "error " + exception.toString();
+                                                            update(exception);
                                                         }
                                                     });
 
-        return "init called - login state: " + AccessToken.getCurrentAccessToken();
+        AccessToken token = AccessToken.getCurrentAccessToken();
+        if (token != null) {
+            return getString(new FacebookStatus(token));
+        } else {
+            return getString(new FacebookStatus());
+        }
+    }
+
+    private void update(Object data) {
+        if (data instanceof Throwable) {
+            sendEvent(((Throwable) data).getMessage());
+            data = null;
+        }
+
+        if (data == null) { // user said no
+            status = new FacebookStatus();
+        } else if (data instanceof AccessToken) {
+            status = new FacebookStatus((AccessToken)data);
+        } else {
+            sendError("programming error in FacebookPlugin#update: unknown type");
+            return;
+        }
+
+        sendEvent(getString(status));
+    }
+
+    private String getString(FacebookStatus status) {
+        String message;
+        try {
+            message = JSON.std.asString(status);
+        } catch (IOException e) {
+            e.printStackTrace();
+            sendError(e.getMessage());
+            message = "";
+        }
+        return message;
     }
 
     public String login(String scope) {
@@ -81,15 +119,10 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
 
     public String getToken() {
         AccessToken token = AccessToken.getCurrentAccessToken();
-        if (token == null) {
-            return "null";
-        }
-
-        return status + "\n" + String.format("%s %s %s", token.getToken(), token.getApplicationId(), token.getUserId());
+        return getString(new FacebookStatus(token));
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+    @Override public void onActivityResult(int requestCode, int resultCode, Object data) {
+        callbackManager.onActivityResult(requestCode, resultCode, (Intent) data);
     }
 }

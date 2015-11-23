@@ -8,12 +8,14 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.vigour.nativewrapper.plugin.core.BridgeEvents;
 import io.vigour.plugin.facebook.FacebookPlugin;
 
 public class MainActivity extends AppCompatActivity {
 
     FacebookPlugin plugin;
     @Bind(R.id.output) TextView outputView;
+    @Bind(R.id.event) TextView eventView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,22 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         plugin = new FacebookPlugin(this);
+        plugin.setEventInterface(new BridgeEvents() {
+            @Override public void error(String error, String pluginId) {
+                eventView.setText(error);
+                eventView.setTextColor(0xffff0000);
+            }
+
+            @Override public void receive(String error, String message, String pluginId) {
+                if (error != null && error.length() > 0) {
+                    error(error, pluginId);
+                    return;
+                }
+                eventView.setText(message);
+                eventView.setTextColor(0x99000000);
+            }
+        });
+
         feedback(plugin.init("whatever1234"));
 
     }
