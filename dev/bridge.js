@@ -54,5 +54,4 @@ bridge.send = function send (pluginId, fnName, opts, cb) {
   } else {
     return _send.apply(bridge, arguments)
   }
-
 }
