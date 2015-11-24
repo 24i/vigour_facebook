@@ -35,7 +35,7 @@ These are some appId's you can used for web based on domain:
 '1523994961255055' // 192.168.1.23:8081
 
 */
-
+console.log('make facebook instance')
 var facebook = window.fb = new Facebook({
   appId: '1523998237921394' // localhost:8081
 })
