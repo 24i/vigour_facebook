@@ -67,6 +67,7 @@
       }
     },
     "native": {
+      "debug": true,
       "platforms": {
         "ios": {
           "productName": "Facebook Example",
@@ -82,6 +83,8 @@
           }
         },
         "android": {
+          "debug": true,
+          "run": true,
           "productName": "Facebook Example",
           "applicationId": "io.vigour.facebook",
           "appIndexPath": "build.html",
