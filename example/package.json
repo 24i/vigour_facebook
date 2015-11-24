@@ -1,0 +1,16 @@
+{
+	"name": "vigour-facebook-example",
+	"gaston": {
+		"package": true
+	},
+	"vigour": {
+		"facebook": {
+			"appId": "1523994961255055",
+			"scope": "public_profile,email",
+			"web": {
+				"version": "v2.5",
+				"src": "//connect.facebook.net/en_NL/sdk.js"
+			}
+		}
+	}
+}

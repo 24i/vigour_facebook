@@ -45,10 +45,12 @@
     "vigour-element": "*"
   },
   "license": "MIT",
-  "gaston": {
-    "package": true
-  },
   "vigour": {
+    "scope": "public_profile,email",
+    "web": {
+      "version": "v2.5",
+      "src": "//connect.facebook.net/en_NL/sdk.js"
+    },
     "plugin": {
       "android": {
         "className": "io.vigour.plugin.facebook.FacebookPlugin",
