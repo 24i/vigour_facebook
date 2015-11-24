@@ -39,7 +39,8 @@
   "dependencies": {
     "vigour-ua": "0.0.1",
     "vigour-wrapper": "*",
-    "vigour-js": "*"
+    "vigour-js": "*",
+    "lodash": "3.10.x"
   },
   "devDependencies": {
     "vigour-element": "*"
@@ -49,7 +50,8 @@
     "scope": "public_profile,email",
     "web": {
       "version": "v2.5",
-      "src": "//connect.facebook.net/en_NL/sdk.js"
+      "src": "//connect.facebook.net/en_NL/sdk.js",
+      "xfbml": true
     },
     "plugin": {
       "android": {
