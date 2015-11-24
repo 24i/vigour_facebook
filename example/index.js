@@ -74,7 +74,18 @@ var app = new Element({
     on: {
       click () {
         console.log('Login clicked!')
+        app.log.text.val = 'logging in!'
         facebook.login((err, response) => {
+          var txt = 'login callback! err: ' + err + ', response: ' + JSON.stringify(response, false, 2)
+
+          if(!facebook.token.val) {
+            txt += ' LOGIN FAILED, NO TOKEN SET'
+          } else {
+            txt += ' LOGIN SUCCEEDED!!!'
+          }
+
+          app.log.text.val = txt
+
           console.log('---- login callback!', err ? err : '')
           console.log('response', response)
           console.log('facebook.token.val', facebook.token.val)
@@ -87,7 +98,15 @@ var app = new Element({
     text: 'Logout',
     on: {
       click () {
-        facebook.logout(() => {
+        app.log.text.val = 'logging out!'
+        facebook.logout((err, response) => {
+          var txt = 'logout callback! err: ' + err + ', response: ' + JSON.stringify(response, false, 2)
+          if(facebook.token.val) {
+            txt += ' LOGOUT FAILED, TOKEN STILL SET'
+          } else {
+            txt += ' LOGOUT SUCCEEDED!!!'
+          }
+          app.log.text.val = txt
           console.log('---- LOGOUT DONE!')
         })
       }
@@ -111,10 +130,15 @@ var app = new Element({
         click () {
           var message = app.sharing.message.message.node.value
           console.log('lol share that', message)
+
+          app.log.text.val = 'sharing...'
+
           facebook.share(message, function (err, response) {
             if (!err) {
+              app.log.text.val = 'shared success! ' + JSON.stringify(response, false, 2)
               console.log('---- shared dat!!', response)
             } else {
+              app.log.text.val = 'share fail! ' + err
               console.error('SHARE ERROR', err)
             }
           })
@@ -130,6 +154,9 @@ var app = new Element({
         }
       }
     }
+  },
+  log: {
+    text: 'everything is ok'
   }
 })
 
