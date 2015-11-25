@@ -7,7 +7,8 @@
     "start": "gaston",
     "test": "gaston test -r browser",
     "build": "gaston build -s ./example/index.js -o ./ -i",
-    "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
+    "ios-test": "gaston bundle -t -s test/browser/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
+    "ios": "wrapper build --native.selectedPlatforms ios",
     "android": "npm run build && wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build"
   },
@@ -37,9 +38,11 @@
     "node": ">=4.1.2"
   },
   "dependencies": {
+    "lodash": "3.10.x",
+    "vigour-config": "0.0.3",
+    "vigour-js": "*",
     "vigour-ua": "0.0.1",
-    "vigour-wrapper": "*",
-    "vigour-js": "*"
+    "vigour-wrapper": "*"
   },
   "devDependencies": {
     "vigour-element": "*"
@@ -49,7 +52,8 @@
     "scope": "public_profile,email",
     "web": {
       "version": "v2.5",
-      "src": "//connect.facebook.net/en_NL/sdk.js"
+      "src": "//connect.facebook.net/en_NL/sdk.js",
+      "xfbml": true
     },
     "plugin": {
       "android": {
@@ -57,12 +61,14 @@
         "instantiation": "new FacebookPlugin(this)",
         "metadata": {
           "android:name": "com.facebook.sdk.ApplicationId",
-          "android:value": "@string/facebook_app_id"},
+          "android:value": "@string/facebook_app_id"
+        },
         "activity": {
           "android:name": "com.facebook.FacebookActivity",
           "android:configChanges": "keyboard|keyboardHidden|screenLayout|screenSize|orientation",
           "android:theme": "@android:style/Theme.Translucent.NoTitleBar",
-          "android:label": "@string/app_name"},
+          "android:label": "@string/app_name"
+        },
         "strings": {
           "facebook_app_id": "fill in facebook key here"
         }
@@ -81,7 +87,9 @@
           "assets": {
             "build.html": true,
             "build.js": true,
-            "build.css": true
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
           }
         },
         "android": {
