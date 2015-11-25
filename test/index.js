@@ -4,7 +4,7 @@ var runTests = require('./tests')
 
 describe('Facebook', () => {
   it('should be able to require facebook', () => {
-    var facebook = window.vigour_facebook = require('../lib/web')
+    var facebook = window.vigour_facebook = require('../lib')
     facebook.appId.val = '1523994961255055'
   })
 
