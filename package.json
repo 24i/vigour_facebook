@@ -38,10 +38,11 @@
     "node": ">=4.1.2"
   },
   "dependencies": {
-    "vigour-ua": "0.0.1",
-    "vigour-wrapper": "*",
+    "lodash": "3.10.x",
+    "vigour-config": "0.0.3",
     "vigour-js": "*",
-    "lodash": "3.10.x"
+    "vigour-ua": "0.0.1",
+    "vigour-wrapper": "*"
   },
   "devDependencies": {
     "vigour-element": "*"
@@ -60,12 +61,14 @@
         "instantiation": "new FacebookPlugin(this)",
         "metadata": {
           "android:name": "com.facebook.sdk.ApplicationId",
-          "android:value": "@string/facebook_app_id"},
+          "android:value": "@string/facebook_app_id"
+        },
         "activity": {
           "android:name": "com.facebook.FacebookActivity",
           "android:configChanges": "keyboard|keyboardHidden|screenLayout|screenSize|orientation",
           "android:theme": "@android:style/Theme.Translucent.NoTitleBar",
-          "android:label": "@string/app_name"},
+          "android:label": "@string/app_name"
+        },
         "strings": {
           "facebook_app_id": "1523994961255055"
         }
