@@ -21,11 +21,15 @@ describe('Facebook Native Bridge Plugin', function () {
 
 	})
 
-	describe('login', function () {
-		it('should give the right', function () {
-		
-		})
-	})
+	// describe('login', function () {
+
+	// 	it('should include expected response properties on login', function () {
+	// 		facebook.send('login', )
+	// 	})
+
+
+
+	// })
 
 	
 

@@ -7,6 +7,7 @@
     "start": "gaston",
     "test": "gaston test -r browser",
     "build": "gaston build -s ./example/index.js -o ./ -i",
+    "ios-test": "gaston bundle -t -s test/browser/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
     "ios": "wrapper build --native.selectedPlatforms ios",
     "android": "npm run build && wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build"
