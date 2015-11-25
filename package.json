@@ -10,7 +10,7 @@
     "build-test": "gaston bundle -t -s test/browser/index.js -o . -i",
     "ios-test": "npm run build-test && wrapper build --native.selectedPlatforms ios",
     "ios": "wrapper build --native.selectedPlatforms ios",
-    "ios-test": "npm run build-test && wrapper build --native.selectedPlatforms android",
+    "android-test": "npm run build-test && wrapper build --native.selectedPlatforms android",
     "android": "npm run build && wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build"
   },
