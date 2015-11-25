@@ -7,7 +7,7 @@
     "start": "gaston",
     "test": "gaston test -r browser",
     "build": "gaston build -s ./example/index.js -o ./ -i",
-    "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
+    "ios": "wrapper build --native.selectedPlatforms ios",
     "android": "npm run build && wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build"
   },
@@ -82,7 +82,9 @@
           "assets": {
             "build.html": true,
             "build.js": true,
-            "build.css": true
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
           }
         },
         "android": {
