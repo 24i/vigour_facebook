@@ -11,6 +11,53 @@
 				"version": "v2.5",
 				"src": "//connect.facebook.net/en_NL/sdk.js"
 			}
-		}
+		},
+		"plugin": {
+      "android": {
+        "className": "io.vigour.plugin.facebook.FacebookPlugin",
+        "instantiation": "new FacebookPlugin(this)",
+        "metadata": {
+          "android:name": "com.facebook.sdk.ApplicationId",
+          "android:value": "@string/facebook_app_id"},
+        "activity": {
+          "android:name": "com.facebook.FacebookActivity",
+          "android:configChanges": "keyboard|keyboardHidden|screenLayout|screenSize|orientation",
+          "android:theme": "@android:style/Theme.Translucent.NoTitleBar",
+          "android:label": "@string/app_name"},
+        "strings": {
+          "facebook_app_id": "1523994961255055"
+        }
+      }
+    },
+    "native": {
+      "platforms": {
+        "ios": {
+          "productName": "Facebook Example",
+          "organizationName": "Vigour",
+          "organizationIdentifier": "io.vigour.facebook",
+          "buildNumber": "1",
+          "appIndexPath": "build.html",
+          "NSAllowsArbitraryLoads": true,
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        },
+        "android": {
+          "productName": "Facebook Example",
+          "applicationId": "io.vigour.facebook",
+          "appIndexPath": "build.html",
+          "keystoreFile": "example.keystore",
+          "keystorePassword": "shmexample",
+          "keystoreAlias": "blabla",
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        }
+      }
+    }
 	}
 }
