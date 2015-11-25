@@ -2,7 +2,6 @@
 
 var ua = require('vigour-ua')
 var agent = ua(navigator.userAgent)
-
 if (agent.platform === 'android' || agent.platform === 'ios') {
 	require('gaston-tester')
 }

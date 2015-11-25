@@ -1,7 +1,13 @@
 'use strict'
 
-var runTests = require('../tests')
+var ua = require('vigour-ua')
+var agent = ua(navigator.userAgent)
+if (agent.platform === 'android' || agent.platform === 'ios') {
+	require('gaston-tester')
+}
 
+var runTests = require('../tests')
+alert('lets test?' + typeof describe)
 describe('Facebook Manual Tests', function () {
 	describe('require facebook', function() {
 		it('should require facebook API', function () {
