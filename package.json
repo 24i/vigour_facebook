@@ -41,10 +41,10 @@
   },
   "dependencies": {
     "lodash": "3.10.x",
-    "vigour-config": "0.0.3",
-    "vigour-js": "*",
-    "vigour-ua": "0.0.1",
-    "vigour-wrapper": "*"
+    "vigour-config": "~0.0.6",
+    "vigour-js": "~0.3.0",
+    "vigour-ua": "0.0.x",
+    "vigour-wrapper": "~2.0.7"
   },
   "devDependencies": {
     "vigour-element": "*"
