@@ -5,14 +5,25 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/.bin/gaston test -r browser",
-    "build": "./node_modules/.bin/gaston build -s ./example/index.js -o ./ -i",
-    "ios-test": "./node_modules/.bin/gaston bundle -t -s test/browser/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
-    "ios-test-manual": "./node_modules/.bin/gaston bundle -t -s test/manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
-    "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
-    "android-test": "./node_modules/.bin/gaston bundle -t -s test/browser/index.js -o . -i && wrapper build --native.selectedPlatforms android",
-    "android-test-manual": "./node_modules/.bin/gaston bundle -t -s test/manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
-    "android": "npm run build && wrapper build --native.selectedPlatforms android",
-    "all": "npm run build && wrapper build"
+    "build": "spawn 'npm run build' example",
+    "build-test": "./node_modules/.bin/gaston bundle -t -s test/browser/index.js -o test/browser/ -i",
+    "build-test-manual": "./node_modules/.bin/gaston bundle -t -s test/manual/index.js -o test/manual/ -i",
+    "build-all": "npm run build && npm run build-test && npm run build-test-manual",
+
+    "ios": "spawn 'npm run ios' example",
+    "ios-test": "npm run build-test && wrapper build --native.selectedPlatforms ios",
+    "ios-test-manual": "npm run build-test-manual && wrapper build --native.selectedPlatforms ios",
+    "ios-all": "npm run ios && npm run ios-test && npm run ios-test-manual",
+
+    "android": "spawn 'npm run android' example",
+    "android-test": "npm run build-test && wrapper build --native.selectedPlatforms android",
+    "android-test-manual": "npm run build-test-manual && wrapper build --native.selectedPlatforms android",
+    "android-all": "npm run android && npm run android-test && npm run android-test-manual",
+
+    "all": "spawn 'npm run all' example",
+    "all-test": "npm run build-test && wrapper build",
+    "all-test-manual": "npm run build-test-manual && wrapper build",
+    "all-all": "npm run all && npm run all-test && npm run all-test-manual"
   },
   "repository": {
     "type": "git",
@@ -52,13 +63,13 @@
   },
   "license": "MIT",
   "vigour": {
-    "scope": "public_profile,email",
-    "web": {
-      "version": "v2.5",
-      "src": "//connect.facebook.net/en_NL/sdk.js",
-      "xfbml": true
-    },
     "plugin": {
+      "scope": "public_profile,email",
+      "web": {
+        "version": "v2.5",
+        "src": "//connect.facebook.net/en_NL/sdk.js",
+        "xfbml": true
+      },
       "android": {
         "className": "io.vigour.plugin.facebook.FacebookPlugin",
         "instantiation": "new FacebookPlugin(this)",
@@ -81,7 +92,7 @@
       "debug": true,
       "platforms": {
         "ios": {
-          "productName": "Facebook Example",
+          "productName": "Facebook Tests",
           "organizationName": "Vigour",
           "organizationIdentifier": "io.vigour.facebook",
           "buildNumber": "1",
@@ -98,7 +109,7 @@
         "android": {
           "debug": true,
           "run": true,
-          "productName": "Facebook Example",
+          "productName": "Facebook Tests",
           "applicationId": "io.vigour.facebook",
           "appIndexPath": "build.html",
           "keystoreFile": "example.keystore",
@@ -107,7 +118,9 @@
           "assets": {
             "build.html": true,
             "build.js": true,
-            "build.css": true
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
           }
         }
       }

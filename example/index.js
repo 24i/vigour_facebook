@@ -1,6 +1,12 @@
 'use strict'
 
 require('./style.less')
+console.log('window', window)
+// inject plain
+var plain = require('vigour-js/lib/methods/plain')
+var Observable = require('vigour-js/lib/observable')
+Observable.prototype.inject(plain)
+
 var Element = require('vigour-element')
 Element.prototype.inject(
   require('vigour-element/lib/property/text'),
@@ -10,23 +16,11 @@ Element.prototype.inject(
   require('vigour-element/lib/events/render')
 )
 
-// require facebook
-var Facebook = require('../lib/')
-
-// inject plain
-var plain = require('vigour-js/lib/methods/plain')
-var Observable = require('vigour-js/lib/observable')
-Observable.prototype.inject(plain)
-
-// create facebook instance
-
 /*
 
+Require facebook
+
 This will read appId from your package.json (pkg.vigour.facebook.appId):
-
-var facebook = new Facebook()
-
-This is the promoted way. For dev purposes you can set the appId and other settings when instantiating:
 
 These are some appId's you can used for web based on domain:
 
@@ -35,18 +29,66 @@ These are some appId's you can used for web based on domain:
 '1523994961255055' // 192.168.1.23:8081
 
 */
-console.log('make facebook instance')
-var facebook = window.fb = new Facebook({
-  appId: '1523998237921394' // localhost:8081
+var facebook = require('../lib/')
+
+facebook.login.on('data', function () {
+  console.log('---- login callback!')
+  console.log('val', this.val)
+  console.log('facebook.token.val', facebook.token.val)
+  var txt = 'login callback'
+  if (this.val === 'success') {
+    txt += ' success'
+    if (!facebook.token.val) {
+      txt += ' LOGIN FAILED, NO TOKEN SET'
+    } else {
+      txt += ' LOGIN SUCCEEDED!!!'
+    }
+  } else {
+    txt += ' error, err: ' + this.val
+  }
+
+  app.log.text.val = txt
+  console.log('---- LOGIN DONE!')
+})
+facebook.login.on('error', function () {
+  console.log('login error', this)
 })
 
-/*
+// facebook.logout.on('data', function () {
+//   console.log('---- logout callback!')
+//   console.log('val', this.val)
+//   console.log('facebook.token.val', facebook.token.val)
+//   var txt = 'logout callback'
+//   if (this.val === 'success') {
+//     txt += ' success'
+//     if (facebook.token.val) {
+//       txt += ' LOGOUT FAILED, TOKEN STILL SET'
+//     } else {
+//       txt += ' LOGOUT SUCCEEDED'
+//     }
+//   }
+//   app.log.text.val = txt
+//   console.log('---- LOGOUT DONE!')
+// })
+// facebook.logout.on('error', function () {
+//   console.log('logout error', this)
+// })
 
-It's advised to
-
-var facebook = new Facebook()
-
-*/
+facebook.share.on('data', function () {
+  console.log('---- share callback!')
+  console.log('val', this.val)
+  if (this.val === 'success') {
+    app.log.text.val = 'shared success! ' + JSON.stringify(this.val, false, 2)
+    console.log('---- shared dat!!', this.val)
+  } else {
+    app.log.text.val = 'share fail! ' + this.val
+    console.error('SHARE ERROR', this.val)
+  }
+  console.log('---- SHARING DONE!')
+})
+facebook.share.on('error', function () {
+  console.log('share error', this)
+})
 
 var ShareInput = new Element({
   css: 'input-group',
@@ -75,21 +117,7 @@ var app = new Element({
       click () {
         console.log('Login clicked!')
         app.log.text.val = 'logging in!'
-        facebook.login((err, response) => {
-          var txt = 'login callback! err: ' + err + ', response: ' + JSON.stringify(response, false, 2)
-
-          if (!facebook.token.val) {
-            txt += ' LOGIN FAILED, NO TOKEN SET'
-          } else {
-            txt += ' LOGIN SUCCEEDED!!!'
-          }
-
-          app.log.text.val = txt
-
-          console.log('---- login callback!', err ? err : '')
-          console.log('response', response)
-          console.log('facebook.token.val', facebook.token.val)
-        })
+        facebook.login.val = true
       }
     }
   },
@@ -98,17 +126,9 @@ var app = new Element({
     text: 'Logout',
     on: {
       click () {
+        console.log('Logout clicked!')
         app.log.text.val = 'logging out!'
-        facebook.logout((err, response) => {
-          var txt = 'logout callback! err: ' + err + ', response: ' + JSON.stringify(response, false, 2)
-          if (facebook.token.val) {
-            txt += ' LOGOUT FAILED, TOKEN STILL SET'
-          } else {
-            txt += ' LOGOUT SUCCEEDED!!!'
-          }
-          app.log.text.val = txt
-          console.log('---- LOGOUT DONE!')
-        })
+        facebook.login.val = false
       }
     }
   },
@@ -128,20 +148,13 @@ var app = new Element({
       text: 'Share',
       on: {
         click () {
+          console.log('Share clicked!')
           var message = app.sharing.message.message.node.value
-          console.log('lol share that', message)
+          console.log('sharing: ', message)
 
           app.log.text.val = 'sharing...'
 
-          facebook.share(message, function (err, response) {
-            if (!err) {
-              app.log.text.val = 'shared success! ' + JSON.stringify(response, false, 2)
-              console.log('---- shared dat!!', response)
-            } else {
-              app.log.text.val = 'share fail! ' + err
-              console.error('SHARE ERROR', err)
-            }
-          })
+          facebook.share.val = message
         }
       }
     },
@@ -150,6 +163,7 @@ var app = new Element({
       text: 'Reset',
       on: {
         click () {
+          console.log('Reset clicked!')
           app.sharing.message.message.node.value = ''
         }
       }
@@ -161,7 +175,7 @@ var app = new Element({
 })
 
 facebook.on('error', function (err) {
-  console.error(err)
+  console.log('facebook error', err)
 })
 
 facebook.ready.on(() => {
