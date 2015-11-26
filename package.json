@@ -12,6 +12,7 @@
     "ios-test-manual-bridge": "gaston bundle -t -s test/manual/bridge.js -o . -i && wrapper build --native.selectedPlatforms ios",
     "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
     "android-test": "gaston bundle -t -s test/browser/index.js -o . -i && wrapper build --native.selectedPlatforms android",
+    "android-test-manual": "gaston bundle -t -s test/manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
     "android": "npm run build && wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build"
   },
