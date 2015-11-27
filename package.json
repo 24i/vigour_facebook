@@ -1,6 +1,6 @@
 {
   "name": "vigour-facebook",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
@@ -47,8 +47,8 @@
     "vigour-wrapper": "~2.0.7"
   },
   "devDependencies": {
-    "vigour-element": "*",
-    "gaston": "0.27.1"
+    "gaston": "^0.28.2",
+    "vigour-element": "*"
   },
   "license": "MIT",
   "vigour": {
@@ -107,7 +107,9 @@
           "assets": {
             "build.html": true,
             "build.js": true,
-            "build.css": true
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
           }
         }
       }
