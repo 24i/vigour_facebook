@@ -123,12 +123,30 @@ Just for fun, we store the facebook userID.
 
 #### Methods
 
-##### init(appId)
+##### init(opts, callback)
+Once the Plugin is initialized, it should check it's current status (was the user logged in with facebook when he/she closed the app).
+Once this is know, it should call the callback, passing the an Object looking like:
+
+Not Logged in:
+```JSON
+{
+  "connectionStatus": "unknown"
+}
+```
+
+Logged in:
+```JSON
+{
+  "connectionStatus": "connected",
+  "token": "TOKEN_X",
+  "userId": "USERID_X"
+}
+```
 
 ##### login(scope, callback)
 In the JS interface, `scope` is assumed to be part of the app config, but for optimal flexibility of the Plugin methods, we want to be able to pass `scope` here.
 
-##### logout(callback)
+##### logout(opts, callback)
 Same as JS, except no __property management__.
 
 ##### share(url, callback)
@@ -138,5 +156,4 @@ Same as JS, except no __property management__.
 #### ~~Events~~ (don't need events)
 
 ##### ~~loginState~~
-Once the Plugin is initialized, it should check it's current status (was the user logged in with facebook when he/she closed the app).
-Once this is know, it should emit the `loginState` event passing a `response` Object similar to the `response` of the `facebook.login` method.
+
