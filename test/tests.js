@@ -24,17 +24,17 @@ module.exports = function runTests () {
       // alert('logging in!')
       let cnt = 0
       facebook.login.val = true
-      facebook.login.once('data', function onLogin() {
+      facebook.login.once('data', function onLogin () {
         facebook.login.off(onLogin)
         expect(facebook.login.val).to.equal('success')
-        if(++cnt === 2) {
+        if (++cnt === 2) {
           done()
         }
       })
-      facebook.token.once('data', function onToken() {
+      facebook.token.once('data', function onToken () {
         facebook.token.off(onToken)
         expect(facebook.token.val).to.be.ok
-        if(++cnt === 2) {
+        if (++cnt === 2) {
           done()
         }
       })
@@ -43,7 +43,7 @@ module.exports = function runTests () {
 
   it('should be able to share', (done) => {
     facebook.share.val = 'http://www.google.com'
-    facebook.share.once('data', function onShared() {
+    facebook.share.once('data', function onShared () {
       facebook.share.off(onShared)
       expect(facebook.share.val).to.equal('success')
       done()
@@ -53,8 +53,8 @@ module.exports = function runTests () {
   it('should be able to log out', (done) => {
     facebook.login.val = false
     expect(facebook.token.val).to.be.false
-    if(facebook.loading.val) { // if loading wait till done
-      facebook.loading.once('data', function onLoading() {
+    if (facebook.loading.val) { // if loading wait till done
+      facebook.loading.once('data', function onLoading () {
         facebook.loading.off(onLoading)
         done()
       })
@@ -65,7 +65,7 @@ module.exports = function runTests () {
 
   it('should be able to share from non logged in state', (done) => {
     facebook.share.val = 'http://www.vigour.io'
-    facebook.share.once('data',  function onShare() {
+    facebook.share.once('data', function onShare () {
       facebook.share.off(onShare)
       expect(facebook.share.val).to.equal('success')
       expect(facebook.token.val).to.be.ok
