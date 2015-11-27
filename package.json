@@ -59,7 +59,8 @@
   },
   "devDependencies": {
     "vigour-element": "*",
-    "gaston": "0.27.1"
+    "gaston": "0.27.1",
+    "vigour-spawn": "^1.0.1"
   },
   "license": "MIT",
   "vigour": {
