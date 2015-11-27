@@ -68,7 +68,6 @@ module.exports = function runTests () {
     facebook.share.once('data',  function onShare() {
       facebook.share.off(onShare)
       expect(facebook.share.val).to.equal('success')
-      expect(facebook.token.val).to.be.ok
       done()
     })
   })
