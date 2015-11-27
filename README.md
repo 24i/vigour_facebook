@@ -135,8 +135,8 @@ Same as JS, except no __property management__.
 Same as JS, except no __property management__.
 
 
-#### Events
+#### ~~Events~~ (don't need events)
 
-##### loginState
+##### ~~loginState~~
 Once the Plugin is initialized, it should check it's current status (was the user logged in with facebook when he/she closed the app).
 Once this is know, it should emit the `loginState` event passing a `response` Object similar to the `response` of the `facebook.login` method.
