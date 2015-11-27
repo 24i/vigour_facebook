@@ -47,8 +47,8 @@
     "vigour-wrapper": "~2.0.7"
   },
   "devDependencies": {
-    "vigour-element": "*",
-    "gaston": "0.27.1"
+    "gaston": "^0.28.2",
+    "vigour-element": "*"
   },
   "license": "MIT",
   "vigour": {
