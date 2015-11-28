@@ -55,16 +55,16 @@ module.exports = {
       }
     }
   },
-  // define: {
-  //   _isLoading (label) {
-  //     var fb = this
-  //     fb._loadings.setKey(label, true)
-  //     fb.loading.val = true
-  //   },
-  //   _isNotLoading (label) {
-  //     var fb = this
-  //     fb._loadings[label] && fb._loadings[label].remove()
-  //     fb.loading.val = !isEmpty(fb._loadings)
-  //   }
-  // }
+  define: {
+    _isLoading (label) {
+      var fb = this
+      fb._loadings.setKey(label, true)
+      fb.loading.val = true
+    },
+    _isNotLoading (label) {
+      var fb = this
+      fb._loadings[label] && fb._loadings[label].remove()
+      fb.loading.val = !isEmpty(fb._loadings)
+    }
+  }
 }

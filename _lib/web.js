@@ -3,20 +3,18 @@
 var Observable = require('vigour-js/lib/observable')
 var Config = require('vigour-config')
 
-var pkg = require('../package.json').vigour
-
+// var pkg = require('../package.json').vigour
 const SDK_ID = 'facebook-jssdk'
-
 const ERR_SRC = 'Facebook: can not init without skd src'
-const ERR_SCP = 'Facebook: missing scope'
+// const ERR_SCP = 'Facebook: missing scope'
 const ERR_APP = 'Facebook: missing appId'
 
-var shared = require('./shared')
 
 var facebook = module.exports = new Observable({
-  inject: shared,
-  platform: 'web',
+  inject: require('./shared'),
+  // why do we need initialised?
   initialised: false,
+  // we can just store this on the object (no instances)
   _queue: { useVal: {} },
   define: {
     init (appId) {
@@ -24,6 +22,7 @@ var facebook = module.exports = new Observable({
       if (appId) {
         fb.appId.val = appId
       }
+      // can't init without appId, why not break here?
       if (fb.ready.val) {
         return true
       } else {
@@ -31,11 +30,12 @@ var facebook = module.exports = new Observable({
           init(fb)
         }
         return false
-      }      
+      }
     },
+    // why do we make this private?
     _login (callback) {
       var fb = this
-      if(fb.token.val) {
+      if (fb.token.val) {
         return callback && callback(null)
       }
       if (fb.init()) {
@@ -62,7 +62,7 @@ var facebook = module.exports = new Observable({
     },
     _logout (callback) {
       var fb = this
-      if(!fb.token.val) {
+      if (!fb.token.val) {
         return callback && callback(null)
       }
       fb._isNotLoading('login')
@@ -84,8 +84,9 @@ var facebook = module.exports = new Observable({
         } else {
           fb._queue._logout = [callback]
         }
-      } 
+      }
     },
+    // why is this not private?
     loginResponse (response) {
       var fb = this
       var setobj = {
@@ -94,7 +95,7 @@ var facebook = module.exports = new Observable({
       if (response.status === 'connected') {
         var auth = response.authResponse
         setobj.token = auth.accessToken
-        setobj.userId = auth.userId
+        setobj.userId = auth.userID
         setobj.login = 'success'
         // setobj.signedRequest: auth.signedRequest
       }
@@ -121,6 +122,7 @@ var facebook = module.exports = new Observable({
   }
 })
 
+// what is happening here?
 var config = new Config()
 if (config.facebook) {
   facebook.set(config.facebook.convert())
@@ -151,7 +153,6 @@ function init (fb) {
         fb[key].apply(fb, fb._queue[key])
       }
     })
-    
   }
   // insert script
   var src = fbWeb && fbWeb.src && fbWeb.src.val

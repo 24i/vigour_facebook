@@ -1,15 +1,28 @@
 'use strict'
+var facebook = require('../lib')
 
-var runTests = require('./tests')
-
-describe('Facebook', () => {
-  it('should be able to require facebook', () => {
-    var facebook = window.vigour_facebook = require('../lib')
-    facebook.appId.val = '1523998237921394'//1523994961255055
+describe('Facebook plugin', function () {
+  it('log in', function (done) {
+    this.timeout(10000)
+    facebook.token.once(function () {
+      if (this.val) done()
+    })
+    facebook.val = true
   })
 
-  describe('methods and properties', function(){
-		this.timeout(2 * 60 * 1000)
-    runTests()
+  it('share', function (done) {
+    this.timeout(10000)
+    facebook.shared.once(function () {
+      if (this.val) done()
+    })
+    facebook.share.val = 'http://vigour.io'
+  })
+
+  it('log out', function (done) {
+    this.timeout(5000)
+    facebook.token.once(function () {
+      if (!this.val) done()
+    })
+    facebook.val = false
   })
 })

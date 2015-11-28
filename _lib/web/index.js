@@ -27,6 +27,7 @@ module.exports = new Observable({
         throw new Error('No app id defined')
       }
       if (this.initialised) {
+        // do we even want to be able to initialise again?
         this.ready.is(true, () => this.initInternal(appId))
       } else {
         let script = document.createElement('script')
@@ -64,48 +65,46 @@ module.exports = new Observable({
       this.set(obj)
     },
     login (cb) {
-      var ready = this.ready
-      if (ready.val) {
-        if (this.token.val) {
-          return cb && cb(null)
-        } else {
-          let success = (res) => {
+      this.ready.is(true, () => {
+        if (!this.token.val) {
+          FB.login((res) => {
             this.handleResponse(res)
-            if (cb) {
-              cb(null, res)
-            }
-          }
-          FB.login(success, { scope: this.scope.val })
+            if (cb) cb(null, res)
+          }, { scope: this.scope.val })
+        } else if (cb) {
+          cb(null)
         }
-      } else {
-        ready.once(() => this.login(cb))
-        if (!this.initialised) {
-          this.init()
-        }
-      }
+      })
     },
     logout (cb) {
-      var ready = this.ready
-      if (ready.val) {
+      this.ready.is(true, () => {
         if (this.token.val) {
-          return cb && cb(null)
-        } else {
-          let success = (res) => {
-            if (cb) {
-              cb(null, res)
-            }
-          }
-          FB.logout(success)
+          FB.logout((res) => {
+            this.handleResponse(res)
+            if (cb) cb(null, res)
+          })
+        } else if (cb) {
+          cb(null)
         }
-      } else {
-        ready.once(() => this.login(cb))
-        if (!this.initialised) {
-          this.init()
-        }
+      })
+      if (!this.initialised) {
+        this.init()
       }
     },
-    share () {
-
+    share (url, cb) {
+      this.ready.is(true, () => {
+        FB.ui({
+          method: 'share',
+          href: url
+        }, (res) => {
+          if (cb) {
+            cb(null, res)
+          }
+        })
+      })
+      if (!this.initialised) {
+        this.init()
+      }
     }
   }
 })
