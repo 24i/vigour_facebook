@@ -39,9 +39,6 @@
 	        "productName": "Facebook Tests",
 	        "applicationId": "io.vigour.facebook",
 	        "appIndexPath": "build.html",
-	        "keystoreFile": "example.keystore",
-	        "keystorePassword": "shmexample",
-	        "keystoreAlias": "blabla",
 	        "assets": {
 	          "build.html": true,
 	          "build.js": true,
@@ -54,4 +51,3 @@
 	  }
 	}
 }
-
