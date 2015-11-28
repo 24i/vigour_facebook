@@ -76,20 +76,6 @@ var nativeMethods = {
 
 bridge.define({
   send(pluginId, fnName, opts, cb) {
-    console.log('lurklurk opts cb!', opts, cb)
     nativeMethods[fnName](opts, cb, bridge)
   }
 })
-
-// describe('Facebook', () => {
-//   var facebook
-
-//   it('should be able to require facebook', () => {
-//     var facebook = window.vigour_facebook = require('../lib/web')
-//     facebook.appId.val = '1523994961255055'
-//   })
-
-//   describe('methods and properties', () => {
-//     runTests(facebook)
-//   })
-// })
