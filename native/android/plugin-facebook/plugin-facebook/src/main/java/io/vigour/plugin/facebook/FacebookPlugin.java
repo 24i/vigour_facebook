@@ -3,6 +3,7 @@ package io.vigour.plugin.facebook;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -26,6 +27,7 @@ import io.vigour.nativewrapper.plugin.core.Plugin;
  */
 public class FacebookPlugin extends Plugin implements ActivityResultListener {
     private static final String NAME = "facebook";
+    private static final String TAG = NAME;
     Activity activity;
     private LoginManager loginManager;
     public CallbackManager callbackManager;
@@ -37,6 +39,8 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
     }
 
     public String init(String key) {
+        Log.d(TAG, "init called, args: " + key);
+
         FacebookSdk.sdkInitialize(activity.getApplicationContext());
         loginManager = LoginManager.getInstance();
 
@@ -99,7 +103,8 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
         return message;
     }
 
-    public String login(String scope) {
+    public String login(Object scope) {
+        Log.d(TAG, "login called, args: " + scope);
         loginManager.logInWithPublishPermissions(activity, Arrays.asList("publish_actions"));
         return "login called: " + AccessToken.getCurrentAccessToken();
     }
@@ -110,6 +115,7 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
     }
 
     public String share(String url) {
+        Log.d(TAG, "init called, args: " + url);
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse("https://developers.facebook.com"))
                 .build();
