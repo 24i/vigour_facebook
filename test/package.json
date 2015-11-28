@@ -39,6 +39,11 @@
 	        "productName": "Facebook Tests",
 	        "applicationId": "io.vigour.facebook",
 	        "appIndexPath": "build.html",
+					"splashDuration": 0,
+					"strings": {
+						"facebook_app_id": "1523994961255055"
+
+					},
 	        "assets": {
 	          "build.html": true,
 	          "build.js": true,
