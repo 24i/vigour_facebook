@@ -1,5 +1,8 @@
 {
   "name": "vigour-facebook-example",
+  "dependencies": {
+    "vigour-facebook": "../"
+  },
   "gaston": {
     "package": true
   },
