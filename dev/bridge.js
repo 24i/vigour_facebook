@@ -3,7 +3,7 @@
 var bridge = require('vigour-wrapper/lib/bridge')
 // var pkg = require('../package.json')
 // var _pluginId = pkg.name
-var _pluginId = 'vigour-facebook'
+var _pluginId = 'facebook'
 
 // Mutate the bridge to call these fake native methods:
 
