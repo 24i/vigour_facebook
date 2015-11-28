@@ -11,14 +11,12 @@ import java.util.TimeZone;
  * Created by michielvanliempt on 23/11/15.
  */
 public class FacebookStatus {
-    String status;
-    Auth authResponse = new Auth();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
-
+    String connectionStatus;
+    String token;
+    String userId;
 
     public FacebookStatus() {
-        status = "not connected";
-        dateFormat.setTimeZone(TimeZone.getDefault());
+        connectionStatus = "unknown";
     }
 
     public FacebookStatus(AccessToken token) {
@@ -26,35 +24,20 @@ public class FacebookStatus {
         if (token == null) {
             return;
         }
-        status = "connected";
-        authResponse.accessToken = token.getToken();
-        authResponse.userID = token.getUserId();
-        authResponse.expires = token.getExpires();
+        connectionStatus = "connected";
+        this.token = token.getToken();
+        userId = token.getUserId();
     }
 
-    public Auth getAuthResponse() {
-        return authResponse;
+    public String getConnectionStatus() {
+        return connectionStatus;
     }
 
-    public String getStatus() {
-        return status;
+    public String getToken() {
+        return token;
     }
 
-    public class Auth {
-        String accessToken = "";
-        String userID = "";
-        Date expires = new Date();
-
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public String getExpires() {
-            return dateFormat.format(expires);
-        }
-
-        public String getUserID() {
-            return userID;
-        }
+    public String getUserId() {
+        return userId;
     }
 }

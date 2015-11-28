@@ -31,7 +31,7 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
     Activity activity;
     private LoginManager loginManager;
     public CallbackManager callbackManager;
-    FacebookStatus status;
+    FacebookStatus status = new FacebookStatus();
 
     public FacebookPlugin(Activity context) {
         super(NAME);
@@ -73,10 +73,39 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
         }
     }
 
+    public String login(Object scope) {
+        Log.d(TAG, "login called, args: " + scope);
+        loginManager.logInWithPublishPermissions(activity, Arrays.asList("publish_actions"));
+        return getString(new FacebookStatus());
+    }
+
+    public String logout() {
+        loginManager.logOut();
+        return "";
+    }
+
+    public String share(String url) {
+        Log.d(TAG, "init called, args: " + url);
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                .build();
+        ShareDialog.show(activity, content);
+        return getString(status);
+    }
+
+    public String getToken() {
+        update(AccessToken.getCurrentAccessToken());
+        return getString(status);
+    }
+
+    @Override public void onActivityResult(int requestCode, int resultCode, Object data) {
+        callbackManager.onActivityResult(requestCode, resultCode, (Intent) data);
+    }
+
     private void update(Object data) {
         if (data instanceof Throwable) {
-            sendEvent(((Throwable) data).getMessage());
-            data = null;
+            sendError(((Throwable) data).getMessage());
+            status = new FacebookStatus();
         }
 
         if (data == null) { // user said no
@@ -87,8 +116,6 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
             sendError("programming error in FacebookPlugin#update: unknown type");
             return;
         }
-
-        sendEvent(getString(status));
     }
 
     private String getString(FacebookStatus status) {
@@ -103,32 +130,5 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
         return message;
     }
 
-    public String login(Object scope) {
-        Log.d(TAG, "login called, args: " + scope);
-        loginManager.logInWithPublishPermissions(activity, Arrays.asList("publish_actions"));
-        return "login called: " + AccessToken.getCurrentAccessToken();
-    }
 
-    public String logout() {
-        loginManager.logOut();
-        return "logout called: " + AccessToken.getCurrentAccessToken();
-    }
-
-    public String share(String url) {
-        Log.d(TAG, "init called, args: " + url);
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://developers.facebook.com"))
-                .build();
-        ShareDialog.show(activity, content);
-        return "share called";
-    }
-
-    public String getToken() {
-        AccessToken token = AccessToken.getCurrentAccessToken();
-        return getString(new FacebookStatus(token));
-    }
-
-    @Override public void onActivityResult(int requestCode, int resultCode, Object data) {
-        callbackManager.onActivityResult(requestCode, resultCode, (Intent) data);
-    }
 }
