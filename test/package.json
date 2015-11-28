@@ -14,6 +14,44 @@
 		    "version": "v2.5",
 		    "src": "//connect.facebook.net/en_NL/sdk.js"
 		  }
-		}
+		},
+	  "native": {
+	    "debug": true,
+	    "platforms": {
+	      "ios": {
+	        "productName": "Facebook Tests",
+	        "organizationName": "Vigour",
+	        "organizationIdentifier": "io.vigour.facebook",
+	        "buildNumber": "1",
+	        "appIndexPath": "build.html",
+	        "NSAllowsArbitraryLoads": true,
+	        "assets": {
+	          "build.html": true,
+	          "build.js": true,
+	          "build.css": true,
+	          "mocha.js": true,
+	          "mocha.css": true
+	        }
+	      },
+	      "android": {
+	        "debug": true,
+	        "run": true,
+	        "productName": "Facebook Tests",
+	        "applicationId": "io.vigour.facebook",
+	        "appIndexPath": "build.html",
+	        "keystoreFile": "example.keystore",
+	        "keystorePassword": "shmexample",
+	        "keystoreAlias": "blabla",
+	        "assets": {
+	          "build.html": true,
+	          "build.js": true,
+	          "build.css": true,
+	          "mocha.js": true,
+	          "mocha.css": true
+	        }
+	      }
+	    }
+	  }
 	}
 }
+
