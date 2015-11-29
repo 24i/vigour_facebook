@@ -54,5 +54,18 @@
 	      }
 	    }
 	  }
-	}
+	},
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect",
+      "before",
+      "after",
+      "beforeEach",
+      "afterEach",
+      "sinon",
+      "FB"
+    ]
+  }
 }
