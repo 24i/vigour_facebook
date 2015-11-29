@@ -3,7 +3,7 @@ var pkg = require('../../package.json')
 var bridge = require('vigour-wrapper/lib/bridge')
 var yesno
 var nativeMethods = {
-  init (opt, cb) {
+  init(opt, cb) {
     // get current logged in status
     // in case of error > cb(err)
     // in case of not
@@ -20,7 +20,7 @@ var nativeMethods = {
       cb && cb(null, response)
     })
   },
-  login (opts, cb) {
+  login(opts, cb) {
     // log in with facebook
     // opts === undefined
     // in case of error > cb(err)
@@ -35,7 +35,7 @@ var nativeMethods = {
       cb && cb(null, response)
     })
   },
-  logout (opts, cb) {
+  logout(opts, cb) {
     // log out of facebook
     // opts === undefined
     // in case of error > cb(err)
@@ -45,7 +45,7 @@ var nativeMethods = {
       cb && cb(null)
     })
   },
-  share (opts, cb, bridge) {
+  share(opts, cb, bridge) {
     // share url on facebook
     // opts === url to share
     // in case of error > cb(err)
