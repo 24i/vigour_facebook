@@ -21,6 +21,8 @@ import java.util.Arrays;
 
 import io.vigour.nativewrapper.plugin.core.ActivityResultListener;
 import io.vigour.nativewrapper.plugin.core.Plugin;
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by michielvanliempt on 21/11/15.
@@ -46,25 +48,6 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
 
         callbackManager = CallbackManager.Factory.create();
 
-        LoginManager.getInstance().registerCallback(callbackManager,
-                                                    new FacebookCallback<LoginResult>() {
-                                                        @Override
-                                                        public void onSuccess(LoginResult loginResult) {
-                                                            AccessToken token = loginResult.getAccessToken();
-                                                            update(token);
-                                                        }
-
-                                                        @Override
-                                                        public void onCancel() {
-                                                            update(null);
-                                                        }
-
-                                                        @Override
-                                                        public void onError(FacebookException exception) {
-                                                            update(exception);
-                                                        }
-                                                    });
-
         AccessToken token = AccessToken.getCurrentAccessToken();
         if (token != null) {
             return getString(new FacebookStatus(token));
@@ -73,10 +56,42 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
         }
     }
 
-    public String login(Object scope) {
+    public Observable<String> login(Object scope) {
         Log.d(TAG, "login called, args: " + scope);
-        loginManager.logInWithPublishPermissions(activity, Arrays.asList("publish_actions"));
-        return getString(new FacebookStatus());
+
+        return Observable.create(new Observable.OnSubscribe<String>() {
+            @Override public void call(final Subscriber<? super String> subscriber) {
+                Log.d(TAG, "login inside observable call");
+                FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d(TAG, "login inside success");
+                        AccessToken token = loginResult.getAccessToken();
+                        status = new FacebookStatus(token);
+                        subscriber.onNext(getString(status));
+                        subscriber.onCompleted();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "login inside cancel");
+                        status = new FacebookStatus();
+                        subscriber.onNext(getString(status));
+                        subscriber.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Log.d(TAG, "login inside error");
+                        subscriber.onError(exception);
+                        subscriber.onCompleted();
+                    }
+                };
+                LoginManager.getInstance().registerCallback(callbackManager,
+                                                            callback);
+                loginManager.logInWithPublishPermissions(activity, Arrays.asList("publish_actions"));
+            }
+        });
     }
 
     public String logout() {
@@ -94,28 +109,13 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
     }
 
     public String getToken() {
-        update(AccessToken.getCurrentAccessToken());
+        status = new FacebookStatus(AccessToken.getCurrentAccessToken());
         return getString(status);
     }
 
     @Override public void onActivityResult(int requestCode, int resultCode, Object data) {
+        Log.i(TAG, "onactivityresult");
         callbackManager.onActivityResult(requestCode, resultCode, (Intent) data);
-    }
-
-    private void update(Object data) {
-        if (data instanceof Throwable) {
-            sendError(((Throwable) data).getMessage());
-            status = new FacebookStatus();
-        }
-
-        if (data == null) { // user said no
-            status = new FacebookStatus();
-        } else if (data instanceof AccessToken) {
-            status = new FacebookStatus((AccessToken)data);
-        } else {
-            sendError("programming error in FacebookPlugin#update: unknown type");
-            return;
-        }
     }
 
     private String getString(FacebookStatus status) {

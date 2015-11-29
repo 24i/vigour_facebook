@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.vigour.nativewrapper.plugin.core.BridgeEvents;
 import io.vigour.plugin.facebook.FacebookPlugin;
+import rx.Observer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,17 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
         plugin = new FacebookPlugin(this);
         plugin.setEventInterface(new BridgeEvents() {
-            @Override public void error(String error, String pluginId) {
-                eventView.setText(error);
-                eventView.setTextColor(0xffff0000);
-            }
 
-            @Override public void receive(String error, String message, String pluginId) {
-                if (error != null && error.length() > 0) {
-                    error(error, pluginId);
-                    return;
-                }
-                eventView.setText(message);
+            @Override public void receive(String event, String data, String pluginId) {
+                eventView.setText(event + ": " + data);
                 eventView.setTextColor(0x99000000);
             }
         });
@@ -51,7 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.login)
     public void login() {
-        feedback(plugin.login(""));
+        plugin.login("").subscribe(new Observer<String>() {
+            @Override public void onCompleted() {
+                eventView.setText("completed");
+            }
+
+            @Override public void onError(Throwable e) {
+                outputView.setText("login error: " + e.getMessage());
+            }
+
+            @Override public void onNext(String s) {
+                outputView.setText("login result: " + s);
+            }
+        });
     }
 
     @OnClick(R.id.logout)
