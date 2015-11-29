@@ -1,7 +1,8 @@
 'use strict'
+const SHARE_URL = 'http://vigour.io'
 module.exports = function (inject) {
   var facebook
-  
+
   it('require facebook', function () {
     facebook = require('../lib')
   })
@@ -13,7 +14,7 @@ module.exports = function (inject) {
   }
 
   it('log in', function (done) {
-    this.timeout(10000)
+    this.timeout(25000)
     facebook.user.token.once(function () {
       expect(facebook.status.val).equals('connected')
       expect(facebook.user.id.val).is.a('string')
@@ -24,12 +25,12 @@ module.exports = function (inject) {
   })
 
   it('share a url', function (done) {
-    this.timeout(10000)
+    this.timeout(5000)
     facebook.shared.once(function () {
-      expect(this.val).equals(facebook.share.val)
+      expect(this.val).equals(SHARE_URL)
       done()
     })
-    facebook.share.val = 'http://vigour.io'
+    facebook.share.val = SHARE_URL
   })
 
   it('log out', function (done) {
@@ -38,5 +39,14 @@ module.exports = function (inject) {
       if (!this.val) done()
     })
     facebook.user.val = false
+  })
+
+  it('share a url when logged out', function (done) {
+    this.timeout(25000)
+    facebook.shared.once(function () {
+      expect(this.val).equals(SHARE_URL)
+      done()
+    })
+    facebook.share.val = SHARE_URL
   })
 }
