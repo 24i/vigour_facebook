@@ -75,8 +75,7 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
                     @Override
                     public void onCancel() {
                         Log.d(TAG, "login inside cancel");
-                        status = new FacebookStatus();
-                        subscriber.onNext(getString(status));
+                        subscriber.onError(new Throwable("user cancelled"));
                         subscriber.onCompleted();
                     }
 
