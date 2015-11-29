@@ -1,5 +1,4 @@
 'use strict'
-var pkg = require('../../package.json')
 var bridge = require('vigour-wrapper/lib/bridge')
 var yesno
 var nativeMethods = {
