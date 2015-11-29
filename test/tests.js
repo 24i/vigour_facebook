@@ -1,16 +1,26 @@
 'use strict'
-var facebook = require('../lib')
+module.exports = function (inject) {
+  var facebook
+  
+  it('require facebook', function () {
+    facebook = require('../lib')
+  })
 
-describe('Facebook plugin', function () {
+  if (inject) {
+    it('create instance with mock properties', function () {
+      facebook = new facebook.Constructor(inject)
+    })
+  }
+
   it('log in', function (done) {
     this.timeout(10000)
-    facebook.token.once(function () {
+    facebook.user.token.once(function () {
       expect(facebook.status.val).equals('connected')
-      expect(facebook.id.val).is.a('string')
+      expect(facebook.user.id.val).is.a('string')
       expect(this.val).is.a('string')
       done()
     })
-    facebook.val = true
+    facebook.user.val = true
   })
 
   it('share a url', function (done) {
@@ -24,9 +34,9 @@ describe('Facebook plugin', function () {
 
   it('log out', function (done) {
     this.timeout(5000)
-    facebook.token.once(function () {
+    facebook.user.token.once(function () {
       if (!this.val) done()
     })
-    facebook.val = false
+    facebook.user.val = false
   })
-})
+}

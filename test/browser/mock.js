@@ -4,6 +4,7 @@ exports.platform = {
     init: {
       facebook () {
         setTimeout(() => {
+          this.handleResponse()
           this.ready.val = true
         }, 10)
       }
@@ -35,14 +36,18 @@ exports.platform = {
       if (res) {
         this.parent.set({
           status: 'connected',
-          token: '12345qwerty',
-          id: 'helloworld'
+          user: {
+            token: '12345qwerty',
+            id: 'helloworld'
+          }
         })
       } else {
         this.parent.set({
           status: 'unknown',
-          token: false,
-          id: false
+          user: {
+            token: false,
+            id: false
+          }
         })
       }
     }
