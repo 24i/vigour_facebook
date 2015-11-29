@@ -15,10 +15,11 @@ module.exports = function (inject) {
 
   it('log in', function (done) {
     this.timeout(25000)
+    // want to be able to listen on user itself
     facebook.user.token.once(function () {
       expect(facebook.status.val).equals('connected')
       expect(facebook.user.id.val).is.a('string')
-      expect(this.val).is.a('string')
+      expect(facebook.user.token.val).is.a('string')
       done()
     })
     facebook.user.val = true
@@ -38,7 +39,7 @@ module.exports = function (inject) {
     facebook.user.token.once(function () {
       if (!this.val) done()
     })
-    facebook.user.val = false
+    facebook.user.val = 0 // temp fix false is not supported
   })
 
   it('share a url when logged out', function (done) {

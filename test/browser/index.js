@@ -6,7 +6,7 @@ describe('Facebook', function () {
     tests(require('./mock'))
   })
 
-  describe('Mock Bridge Tests', function () {
-    tests(require('./bridge'))
-  })
+  // describe('Mock Bridge Tests', function () {
+  //   tests(require('./bridge'))
+  // })
 })
