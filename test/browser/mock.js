@@ -4,51 +4,43 @@ exports.platform = {
     init: {
       facebook () {
         setTimeout(() => {
-          this.handleResponse()
-          this.ready.val = true
+          this.parent.ready.val = true
         }, 10)
       }
     },
     login: {
-      facebook () {
+      facebook (done) {
         setTimeout(() => {
-          this.handleResponse(true)
+          this.parent.set({
+            status: 'connected',
+            user: {
+              token: '12345qwerty',
+              id: 'helloworld'
+            }
+          })
+          done()
         }, 10)
       }
     },
     logout: {
-      facebook () {
+      facebook (done) {
         setTimeout(() => {
-          this.handleResponse()
+          this.parent.set({
+            status: 'unknown',
+            user: {
+              token: false,
+              id: false
+            }
+          })
+          done()
         }, 10)
       }
     },
     share: {
-      facebook (data) {
+      facebook (obj) {
         setTimeout(() => {
-          this.shared.val = data
+          obj.done()
         }, 10)
-      }
-    }
-  },
-  define: {
-    handleResponse (res) {
-      if (res) {
-        this.parent.set({
-          status: 'connected',
-          user: {
-            token: '12345qwerty',
-            id: 'helloworld'
-          }
-        })
-      } else {
-        this.parent.set({
-          status: 'unknown',
-          user: {
-            token: false,
-            id: false
-          }
-        })
       }
     }
   }

@@ -15,10 +15,10 @@ module.exports = function (inject) {
 
   it('log in', function (done) {
     this.timeout(25000)
-    facebook.user.token.once(function () {
+    facebook.user.once(function () {
       expect(facebook.status.val).equals('connected')
+      expect(facebook.user.token.val).is.a('string')
       expect(facebook.user.id.val).is.a('string')
-      expect(this.val).is.a('string')
       done()
     })
     facebook.user.val = true
@@ -26,7 +26,7 @@ module.exports = function (inject) {
 
   it('share a url', function (done) {
     this.timeout(5000)
-    facebook.shared.once(function () {
+    facebook.share.once(function () {
       expect(this.val).equals(SHARE_URL)
       done()
     })
@@ -38,12 +38,12 @@ module.exports = function (inject) {
     facebook.user.token.once(function () {
       if (!this.val) done()
     })
-    facebook.user.val = false
+    facebook.user.val = 0
   })
 
   it('share a url when logged out', function (done) {
     this.timeout(25000)
-    facebook.shared.once(function () {
+    facebook.share.once(function () {
       expect(this.val).equals(SHARE_URL)
       done()
     })
