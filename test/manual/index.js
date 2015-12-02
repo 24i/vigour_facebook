@@ -2,5 +2,6 @@
 require('gaston-tester')
 var tests = require('../tests')
 describe('Facebook', function () {
+  this.timeout(25000)
   tests()
 })
