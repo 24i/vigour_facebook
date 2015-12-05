@@ -1,6 +1,6 @@
 'use strict'
 const SHARE_URL = 'http://vigour.io'
-module.exports = function (inject) {
+module.exports = function (inject, type) {
   var facebook
 
   it('require facebook', function () {

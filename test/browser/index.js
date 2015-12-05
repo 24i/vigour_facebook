@@ -3,10 +3,12 @@ var tests = require('../tests')
 
 describe('Facebook', function () {
   describe('Mock Plugin Tests', function () {
-    tests(require('./mock'))
+    tests(require('../../lib/platform/mock'), 'platform')
   })
 
   describe('Mock Bridge Tests', function () {
-    tests(require('./bridge'))
+    var mockBridge = require('./mockBridge')
+    var nativePlatform = require('../../lib/platform/native')
+    tests(nativePlatform, mockBridge)
   })
 })
