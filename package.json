@@ -1,6 +1,6 @@
 {
   "name": "vigour-facebook",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
@@ -41,7 +41,7 @@
   "dependencies": {
     "lodash": "3.10.x",
     "vigour-config": "~0.0.6",
-    "vigour-js": "~0.3.0",
+    "vigour-env": "~1.0.9",
     "vigour-ua": "0.0.x",
     "vigour-wrapper": "~2.2.0"
   },
