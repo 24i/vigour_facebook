@@ -51,11 +51,13 @@
   },
   "license": "MIT",
   "vigour": {
-    "scope": "public_profile,email",
-    "web": {
-      "version": "v2.5",
-      "src": "//connect.facebook.net/en_NL/sdk.js",
-      "xfbml": true
+    "facebook": {
+      "appId": "1534460276875190",
+      "scope": "public_profile,email",
+      "web": {
+        "version": "v2.5",
+        "src": "//connect.facebook.net/en_NL/sdk.js"
+      }
     },
     "plugin": {
       "android": {

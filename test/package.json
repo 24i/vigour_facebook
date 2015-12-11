@@ -1,60 +1,60 @@
 {
-	"name": "vigour-facebook-tests",
-	"dependencies": {
-		"vigour-facebook": "../"
-	},
-	"gaston": {
-		"package": true
-	},
-	"vigour": {
-		"facebook": {
-		  "appId": "1523994961255055",
-		  "scope": "public_profile,email",
-		  "web": {
-		    "version": "v2.5",
-		    "src": "//connect.facebook.net/en_NL/sdk.js"
-		  }
-		},
-	  "native": {
-	    "debug": true,
-	    "platforms": {
-	      "ios": {
-	        "productName": "Facebook Tests",
-	        "organizationName": "Vigour",
-	        "organizationIdentifier": "io.vigour.facebook",
-	        "buildNumber": "1",
-	        "appIndexPath": "build.html",
-	        "NSAllowsArbitraryLoads": true,
-	        "assets": {
-	          "build.html": true,
-	          "build.js": true,
-	          "build.css": true,
-	          "mocha.js": true,
-	          "mocha.css": true
-	        }
-	      },
-	      "android": {
-	        "debug": true,
-	        "run": true,
-	        "productName": "Facebook Tests",
-	        "applicationId": "io.vigour.facebook",
-	        "appIndexPath": "build.html",
-					"splashDuration": "0",
-					"strings": {
-						"facebook_app_id": "1523994961255055"
+  "name": "vigour-facebook-tests",
+  "dependencies": {
+    "vigour-facebook": "../"
+  },
+  "gaston": {
+    "package": true
+  },
+  "vigour": {
+    "facebook": {
+      "appId": "1534460276875190",
+      "scope": "public_profile,email",
+      "web": {
+        "version": "v2.5",
+        "src": "//connect.facebook.net/en_NL/sdk.js"
+      }
+    },
+    "native": {
+      "debug": true,
+      "platforms": {
+        "ios": {
+          "productName": "Facebook Tests",
+          "organizationName": "Vigour",
+          "organizationIdentifier": "io.vigour.facebook",
+          "buildNumber": "1",
+          "appIndexPath": "build.html",
+          "NSAllowsArbitraryLoads": true,
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
+          }
+        },
+        "android": {
+          "debug": true,
+          "run": true,
+          "productName": "Facebook Tests",
+          "applicationId": "io.vigour.facebook",
+          "appIndexPath": "build.html",
+          "splashDuration": "0",
+          "strings": {
+            "facebook_app_id": "1523994961255055"
 
-					},
-	        "assets": {
-	          "build.html": true,
-	          "build.js": true,
-	          "build.css": true,
-	          "mocha.js": true,
-	          "mocha.css": true
-	        }
-	      }
-	    }
-	  }
-	},
+          },
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true,
+            "mocha.js": true,
+            "mocha.css": true
+          }
+        }
+      }
+    }
+  },
   "standard": {
     "globals": [
       "describe",

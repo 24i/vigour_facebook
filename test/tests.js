@@ -31,18 +31,18 @@ module.exports = function (inject, type) {
     facebook.share.val = SHARE_URL
   })
 
-  it('log out', function (done) {
-    facebook.user.token.once(function () {
-      if (!this.val) done()
-    })
-    facebook.user.val = 0
-  })
+  // it('log out', function (done) {
+  //   facebook.user.token.once(function () {
+  //     if (!this.val) done()
+  //   })
+  //   facebook.user.val = 0
+  // })
 
-  it('share a url when logged out', function (done) {
-    facebook.share.once(function () {
-      expect(this.val).equals(SHARE_URL)
-      done()
-    })
-    facebook.share.val = SHARE_URL
-  })
+  // it('share a url when logged out', function (done) {
+  //   facebook.share.once(function () {
+  //     expect(this.val).equals(SHARE_URL)
+  //     done()
+  //   })
+  //   facebook.share.val = SHARE_URL
+  // })
 }
