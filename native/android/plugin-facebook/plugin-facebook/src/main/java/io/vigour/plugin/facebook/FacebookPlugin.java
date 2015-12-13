@@ -18,6 +18,7 @@ import com.fasterxml.jackson.jr.ob.JSON;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Map;
 
 import io.vigour.nativewrapper.plugin.core.ActivityResultListener;
 import io.vigour.nativewrapper.plugin.core.Plugin;
@@ -40,7 +41,7 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
         activity = context;
     }
 
-    public String init(String key) {
+    public String init(Object key) {
         Log.d(TAG, "init called, args: " + key);
 
         FacebookSdk.sdkInitialize(activity.getApplicationContext());
@@ -98,10 +99,12 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
         return "";
     }
 
-    public String share(String url) {
-        Log.d(TAG, "init called, args: " + url);
+    public String share(Map<String, Object> args) {
+        Log.d(TAG, "init called, args: " + args);
+        String url = args.get("url").toString();
+
         ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                .setContentUrl(Uri.parse(url))
                 .build();
         ShareDialog.show(activity, content);
         return getString(status);
