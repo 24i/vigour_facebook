@@ -13,6 +13,13 @@ module.exports = function (inject, type) {
     })
   }
 
+  it('it must call \'init\' when setting the value', function (done) {
+    facebook.ready.is(true, function () {
+      done()
+    })
+    facebook.val = true
+  })
+
   it('log in', function (done) {
     facebook.user.once(function () {
       expect(facebook.status.val).equals('connected')
