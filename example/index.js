@@ -11,7 +11,7 @@ Element.prototype.inject(
 )
 
 // require facebook
-var Facebook = require('../lib/')
+var facebook = require('../lib/')
 
 // inject plain
 var plain = require('vigour-js/lib/methods/plain')
@@ -35,10 +35,10 @@ These are some appId's you can used for web based on domain:
 '1523994961255055' // 192.168.1.23:8081
 
 */
-console.log('make facebook instance')
-var facebook = window.fb = new Facebook({
-  appId: '1523998237921394' // localhost:8081
-})
+// console.log('make facebook instance')
+// var facebook = window.fb = new Facebook({
+//   appId: '1523998237921394' // localhost:8081
+// })
 
 /*
 
@@ -75,21 +75,7 @@ var app = new Element({
       click () {
         console.log('Login clicked!')
         app.log.text.val = 'logging in!'
-        facebook.login((err, response) => {
-          var txt = 'login callback! err: ' + err + ', response: ' + JSON.stringify(response, false, 2)
-
-          if (!facebook.token.val) {
-            txt += ' LOGIN FAILED, NO TOKEN SET'
-          } else {
-            txt += ' LOGIN SUCCEEDED!!!'
-          }
-
-          app.log.text.val = txt
-
-          console.log('---- login callback!', err ? err : '')
-          console.log('response', response)
-          console.log('facebook.token.val', facebook.token.val)
-        })
+        facebook.user.val = true
       }
     }
   },
@@ -99,16 +85,7 @@ var app = new Element({
     on: {
       click () {
         app.log.text.val = 'logging out!'
-        facebook.logout((err, response) => {
-          var txt = 'logout callback! err: ' + err + ', response: ' + JSON.stringify(response, false, 2)
-          if (facebook.token.val) {
-            txt += ' LOGOUT FAILED, TOKEN STILL SET'
-          } else {
-            txt += ' LOGOUT SUCCEEDED!!!'
-          }
-          app.log.text.val = txt
-          console.log('---- LOGOUT DONE!')
-        })
+        facebook.user.val = false
       }
     }
   },
@@ -132,16 +109,7 @@ var app = new Element({
           console.log('lol share that', message)
 
           app.log.text.val = 'sharing...'
-
-          facebook.share(message, function (err, response) {
-            if (!err) {
-              app.log.text.val = 'shared success! ' + JSON.stringify(response, false, 2)
-              console.log('---- shared dat!!', response)
-            } else {
-              app.log.text.val = 'share fail! ' + err
-              console.error('SHARE ERROR', err)
-            }
-          })
+          facebook.share.val = 'http://google.com'
         }
       }
     },
@@ -169,13 +137,13 @@ facebook.ready.on(() => {
   writeStatus()
 })
 
-facebook.connectionStatus.on(() => {
-  console.log('---- facebook.connectionStatus!', facebook.connectionStatus.val)
+facebook.status.on(() => {
+  console.log('---- facebook.connectionStatus!', facebook.status.val)
   writeStatus()
 })
 
-facebook.token.on(() => {
-  console.log('---- facebook.token!', facebook.token.val)
+facebook.user.token.on(() => {
+  console.log('---- facebook.token!', facebook.user.token.val)
   writeStatus()
 })
 
