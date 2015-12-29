@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "lodash": "3.10.x",
-    "vigour-config": "~0.0.6",
+    "vigour-config": "~0.0.7",
     "vigour-env": "~1.0.9",
     "vigour-ua": "0.0.x",
     "vigour-wrapper": "~2.2.0"
