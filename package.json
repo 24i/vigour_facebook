@@ -11,6 +11,7 @@
     "android-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
     "android": "npm run build && wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build",
+    "tizentv": "npm run build && wrapper build --native.selectedPlatforms tizentv",
     "postinstall": "./makelinks.sh vigour-facebook"
   },
   "repository": {
@@ -42,21 +43,47 @@
     "lodash": "3.10.x",
     "vigour-config": "~0.0.6",
     "vigour-env": "~1.0.9",
+    "vigour-js": "git://git@github.com:vigour-io/vjs#develop",
     "vigour-ua": "0.0.x",
     "vigour-wrapper": "~2.2.0"
   },
   "devDependencies": {
     "gaston": "^0.28.2",
-    "vigour-element": "*"
+    "npmlog": "^2.0.0",
+    "vigour-element": "git://git@github.com:vigour-io/element#develop"
   },
   "license": "MIT",
   "vigour": {
+    "native": {
+      "platforms": {
+        "tizentv": {
+          "assets": {
+            "example/build.html": true,
+            "example/build.js": true,
+            "example/build.css": true,
+            "assets":true
+          },
+          "icons": {
+            "ThumbIcon": "assets/img/appIcon(temporary).png",
+            "BigThumbIcon": "assets/img/appIcon(temporary).png",
+            "ListIcon": "assets/img/appIcon(temporary).png",
+            "BigListIcon": "assets/img/appIcon(temporary).png"
+          },
+          "config": {
+            "appName": "vigourexample",
+            "iconPath": "icons/ThumbIcon.png",
+            "yourDomain": "http://vigour.io/",
+            "entryPoint": "example/build.html"
+          }
+        }
+      }
+    },
     "facebook": {
-      "appId": "1534460276875190",
+      "appId": "441539296031991",
       "scope": "public_profile,email",
       "web": {
         "version": "v2.5",
-        "src": "//connect.facebook.net/en_NL/sdk.js"
+        "src": "https://connect.facebook.net/en_NL/sdk.js"
       }
     },
     "plugin": {
@@ -74,7 +101,7 @@
           "android:label": "@string/app_name"
         },
         "strings": {
-          "facebook_app_id": "1523994961255055"
+          "facebook_app_id": "441539296031991"
         }
       }
     }

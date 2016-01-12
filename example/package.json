@@ -8,11 +8,11 @@
   },
   "vigour": {
     "facebook": {
-      "appId": "1523994961255055",
+      "appId": "1550949618559589",
       "scope": "public_profile,email",
       "web": {
         "version": "v2.5",
-        "src": "//connect.facebook.net/en_NL/sdk.js"
+        "src": "https://connect.facebook.net/en_NL/sdk.js"
       }
     },
     "native": {
