@@ -1,6 +1,6 @@
 {
   "name": "vigour-facebook",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
@@ -61,7 +61,7 @@
             "example/build.html": true,
             "example/build.js": true,
             "example/build.css": true,
-            "assets":true
+            "assets": true
           },
           "icons": {
             "ThumbIcon": "assets/img/appIcon(temporary).png",
