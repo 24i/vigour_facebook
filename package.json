@@ -78,14 +78,6 @@
         }
       }
     },
-    "facebook": {
-      "appId": "441539296031991",
-      "scope": "public_profile,email",
-      "web": {
-        "version": "v2.5",
-        "src": "https://connect.facebook.net/en_NL/sdk.js"
-      }
-    },
     "plugin": {
       "android": {
         "className": "io.vigour.plugin.facebook.FacebookPlugin",
