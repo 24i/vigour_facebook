@@ -41,16 +41,16 @@
   },
   "dependencies": {
     "lodash": "3.10.x",
-    "vigour-config": "~0.0.6",
-    "vigour-env": "~1.0.9",
-    "vigour-js": "git://git@github.com:vigour-io/vjs#develop",
-    "vigour-ua": "0.0.x",
-    "vigour-wrapper": "~2.2.0"
+    "vigour-config": "~0.0.8",
+    "vigour-env": "~1.0.19",
+    "vigour-js": "~0.4.4",
+    "vigour-ua": "~0.0.5",
+    "vigour-wrapper": "~2.2.13"
   },
   "devDependencies": {
     "gaston": "^0.28.2",
     "npmlog": "^2.0.0",
-    "vigour-element": "git://git@github.com:vigour-io/element#develop"
+    "vigour-element": "~0.2.4"
   },
   "license": "MIT",
   "vigour": {
