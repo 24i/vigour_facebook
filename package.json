@@ -5,11 +5,14 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "gaston test -r browser -s test/browser/index.js",
-    "build": "cd example && ../node_modules/.bin/gaston build -s index.js -o ./ -i",
-    "ios-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
+    "build": "cd example && gaston build -s index.js -o ./ -i && pwd",
+    "ios-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
     "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
-    "android-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
-    "android": "npm run build && wrapper build --native.selectedPlatforms android",
+    "android-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
+    "durp": "cd example ; pwd",
+    "wex": "npm run durp ; pwd ; wrapper build --native.selectedPlatforms android",
+    "android": "npm run build && pwd && npm run wrap-android",
+    "wrap-android": "wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build",
     "tizentv": "npm run build && wrapper build --native.selectedPlatforms tizentv",
     "postinstall": "./makelinks.sh vigour-facebook"
@@ -56,24 +59,30 @@
   "vigour": {
     "native": {
       "platforms": {
-        "tizentv": {
+        "ios": {
+          "productName": "Facebook Example",
+          "organizationName": "Vigour",
+          "organizationIdentifier": "io.vigour.facebook",
+          "buildNumber": "1",
+          "appIndexPath": "build.html",
+          "NSAllowsArbitraryLoads": true,
           "assets": {
-            "example/build.html": true,
-            "example/build.js": true,
-            "example/build.css": true,
-            "assets": true
-          },
-          "icons": {
-            "ThumbIcon": "assets/img/appIcon(temporary).png",
-            "BigThumbIcon": "assets/img/appIcon(temporary).png",
-            "ListIcon": "assets/img/appIcon(temporary).png",
-            "BigListIcon": "assets/img/appIcon(temporary).png"
-          },
-          "config": {
-            "appName": "vigourexample",
-            "iconPath": "icons/ThumbIcon.png",
-            "yourDomain": "http://vigour.io/",
-            "entryPoint": "example/build.html"
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        },
+        "android": {
+          "productName": "Facebook Example",
+          "applicationId": "io.vigour.facebook",
+          "appIndexPath": "build.html",
+          "keystoreFile": "example.keystore",
+          "keystorePassword": "shmexample",
+          "keystoreAlias": "blabla",
+          "assets": {
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
           }
         }
       }
