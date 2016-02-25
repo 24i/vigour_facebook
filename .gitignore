@@ -7,6 +7,10 @@ mocha.js
 test-runner.html
 bundles
 build
-build.*
+build.js
+build.html
+build.css
 bundle
-bundle.*
+bundle.js
+bundle.html
+bundle.css
