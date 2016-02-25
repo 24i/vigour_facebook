@@ -1,10 +1,12 @@
 'use strict'
-var Observable = require('vigour-js/lib/observable')
-// Observable.prototype.inject(require('vigour-js/lib/operator/subscribe'))
-// Observable.prototype.inject(require('vigour-js/lib/operator/transform'))
+
+var Observable = require('vigour-observable')
+var Element = require('vigour-element')
 
 require('./style.less')
-var app = window.app = require('vigour-element/lib/app')
+var app = window.app = new Element({
+  DOM: document.body
+})
 var facebook = require('../lib/')
 
 var status = new Observable('disconnected')
