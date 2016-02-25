@@ -1,6 +1,6 @@
 'use strict'
 
-var bridge = require('vigour-wrapper/lib/bridge')
+var bridge = require('vigour-wrapper-bridge')
 // var pkg = require('../package.json')
 // var _pluginId = pkg.name
 var _pluginId = 'facebook'

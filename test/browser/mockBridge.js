@@ -1,5 +1,5 @@
 'use strict'
-var bridge = require('vigour-wrapper/lib/bridge')
+var bridge = require('vigour-wrapper-bridge')
 var yesno
 
 bridge.label = 'mockBridge'
