@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -66,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.share)
     public void log() {
-        feedback(plugin.share("vigour.io"));
+        Map<String, Object> map = new HashMap<>();
+        map.put("url", "vigour.io");
+        feedback(plugin.share(map));
     }
 
     @OnClick(R.id.token)
