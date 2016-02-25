@@ -46,7 +46,7 @@
     "lodash": "~4.5.1",
     "vigour-config": "~0.1.0",
     "vigour-env": "~1.0.23",
-    "vigour-observable": "~1.0.3",
+    "vigour-observable": "~1.0.7",
     "vigour-ua": "~0.0.9",
     "vigour-wrapper": "~3.0.0"
   },
