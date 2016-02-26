@@ -28,7 +28,6 @@
           "assets": {
             "build.html": true,
             "build.js": true,
-            "build.css": true,
             "mocha.js": true,
             "mocha.css": true
           }
@@ -47,7 +46,6 @@
           "assets": {
             "build.html": true,
             "build.js": true,
-            "build.css": true,
             "mocha.js": true,
             "mocha.css": true
           }
