@@ -54,7 +54,7 @@
     "gaston": "~0.29.10",
     "npmlog": "~2.0.2",
     "vigour-element": "^1.0.1",
-    "vigour-wrapper": "^3.0.0"
+    "vigour-wrapper": "^4.0.0"
   },
   "license": "MIT",
   "vigour": {
