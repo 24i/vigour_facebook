@@ -43,7 +43,6 @@
     "node": ">=4.1.2"
   },
   "dependencies": {
-    "lodash": "~4.5.1",
     "vigour-package": "^1.0.0",
     "vigour-env": "^2.0.0",
     "vigour-observable": "^1.0.3",
@@ -52,7 +51,6 @@
   },
   "devDependencies": {
     "gaston": "~0.29.10",
-    "npmlog": "~2.0.2",
     "vigour-element": "^1.0.1",
     "vigour-wrapper": "^4.0.0"
   },
