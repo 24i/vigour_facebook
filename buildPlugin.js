@@ -9,7 +9,7 @@ exports.start = function () {
     log.info('- configuring facebook -')
 
     var fbAppId = this.opts.vigour.facebook.appId
-    log.info('App ID', fbAppId)
+    console.log('App ID', fbAppId)
     if (this.platform === 'android') {
       if (!this.strings) {
         this.strings = {}
