@@ -1,12 +1,10 @@
 'use strict'
 
-var log = require('npmlog')
-
 module.exports = exports = {}
 
 exports.start = function () {
   if (this.opts.vigour && this.opts.vigour.facebook && this.opts.vigour.facebook.appId) {
-    log.info('- configuring facebook -')
+    console.log('- configuring facebook -')
 
     var fbAppId = this.opts.vigour.facebook.appId
     console.log('App ID', fbAppId)
@@ -21,6 +19,6 @@ exports.start = function () {
       // TODO
     }
   } else {
-    log.error('No `vigour.facebook.appId`', "can't configure facebook!")
+    console.log('No `vigour.facebook.appId`', "can't configure facebook!")
   }
 }

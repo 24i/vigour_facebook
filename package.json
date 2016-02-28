@@ -43,7 +43,6 @@
     "node": ">=4.1.2"
   },
   "dependencies": {
-    "npmlog": "^2.0.2",
     "vigour-env": "^2.0.0",
     "vigour-observable": "^1.0.3",
     "vigour-package": "^1.0.0",
@@ -51,6 +50,7 @@
     "vigour-wrapper-bridge": "^1.0.0"
   },
   "devDependencies": {
+    "bluebird": "^3.3.3",
     "gaston": "~0.29.10",
     "vigour-element": "^1.0.1",
     "vigour-wrapper": "^4.0.0"

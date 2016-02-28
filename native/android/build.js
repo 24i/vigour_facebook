@@ -1,24 +1,23 @@
 #!/usr/bin/env node
 var spawn = require('child_process').spawn
-var log = require('npmlog')
-var Promise = require('promise')
+var Promise = require('bluebird')
 var path = require('path')
 
 // paths
 var srcPath = path.join(__dirname, 'plugin')
 
-log.info('building .aar files from source')
+console.log('building .aar files from source')
 
 function exe (command, cwd) {
   var args = command.split(' ')
   var fnName = args[0]
   args = args.splice(1, args.length - 1)
   return new Promise(function (resolve, reject) {
-    log.info('Executing', command)
+    console.log('Executing', command)
     if (cwd === '') {
       cwd = process.cwd()
     }
-    log.info('in', cwd)
+    console.log('in', cwd)
     var call = spawn(fnName, args, { cwd: cwd })
     call.stdout.on('data', function (data) {
       process.stdout.write(data)
@@ -45,6 +44,6 @@ function assemble () {
 Promise.resolve()
   .then(assemble)
   .catch(function (reason) {
-    log.error(reason)
+    console.log(reason)
     process.exit(1)
   })
