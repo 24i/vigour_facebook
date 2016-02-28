@@ -1,5 +1,7 @@
 'use strict'
 
+var log = require('npmlog')
+
 module.exports = exports = {}
 
 exports.start = function () {
