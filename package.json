@@ -65,8 +65,11 @@
           "organizationIdentifier": "io.vigour.facebook",
           "buildNumber": "1",
           "appIndexPath": "build.html",
+          "appIcon": "assets/img/appIcon.png",
+          "splashScreen": "assets/img/splash.png",
           "NSAllowsArbitraryLoads": true,
           "assets": {
+            "assets": true,
             "build.html": true,
             "build.js": true,
             "build.css": true
@@ -80,6 +83,7 @@
           "keystorePassword": "shmexample",
           "keystoreAlias": "blabla",
           "assets": {
+            "assets": true,
             "build.html": true,
             "build.js": true,
             "build.css": true

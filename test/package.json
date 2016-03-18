@@ -8,7 +8,7 @@
   },
   "vigour": {
     "facebook": {
-      "appId": "1534460276875190",
+      "appId": "1523994961255055",
       "scope": "public_profile,email",
       "web": {
         "version": "v2.5",
@@ -25,6 +25,8 @@
           "buildNumber": "1",
           "appIndexPath": "build.html",
           "NSAllowsArbitraryLoads": true,
+          "appIcon": "assets/img/appIcon.png",
+          "splashScreen": "assets/img/splash.png",
           "assets": {
             "build.html": true,
             "build.js": true,
