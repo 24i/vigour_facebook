@@ -87,9 +87,8 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
                         subscriber.onCompleted();
                     }
                 };
-                LoginManager.getInstance().registerCallback(callbackManager,
-                                                            callback);
-                loginManager.logInWithPublishPermissions(activity, Arrays.asList("publish_actions"));
+                LoginManager.getInstance().registerCallback(callbackManager, callback);
+                loginManager.logInWithReadPermissions(activity, Arrays.asList("public_profile","email"));
             }
         });
     }
@@ -131,6 +130,4 @@ public class FacebookPlugin extends Plugin implements ActivityResultListener {
         }
         return message;
     }
-
-
 }

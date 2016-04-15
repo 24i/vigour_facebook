@@ -1,16 +1,20 @@
 {
   "name": "vigour-facebook",
-  "version": "1.0.7",
+  "version": "2.0.4",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
     "test": "gaston test -r browser -s test/browser/index.js",
-    "build": "cd example && ../node_modules/.bin/gaston build -s index.js -o ./ -i",
-    "ios-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
+    "build": "cd example && gaston build -s index.js -o ./ -i && pwd",
+    "ios-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
     "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
-    "android-test": "cd test && ../node_modules/.bin/gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
-    "android": "npm run build && wrapper build --native.selectedPlatforms android",
+    "android-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
+    "durp": "cd example ; pwd",
+    "wex": "npm run durp ; pwd ; wrapper build --native.selectedPlatforms android",
+    "android": "npm run build && pwd && npm run wrap-android",
+    "wrap-android": "wrapper build --native.selectedPlatforms android",
     "all": "npm run build && wrapper build",
+    "tizentv": "npm run build && wrapper build --native.selectedPlatforms tizentv",
     "postinstall": "./makelinks.sh vigour-facebook"
   },
   "repository": {
@@ -39,24 +43,52 @@
     "node": ">=4.1.2"
   },
   "dependencies": {
-    "lodash": "3.10.x",
-    "vigour-config": "~0.0.7",
-    "vigour-env": "~1.0.9",
-    "vigour-ua": "0.0.x",
-    "vigour-wrapper": "~2.2.0"
+    "npmlog": "^2.0.2",
+    "vigour-env": "^2.0.1",
+    "vigour-observable": "^1.0.3",
+    "vigour-package": "^1.0.0",
+    "vigour-ua": "^1.0.0",
+    "vigour-wrapper-bridge": "^1.0.0"
   },
   "devDependencies": {
-    "gaston": "^0.28.2",
-    "vigour-element": "*"
+    "gaston": "~0.29.10",
+    "vigour-element": "^1.0.1",
+    "vigour-wrapper": "^4.0.0"
   },
   "license": "MIT",
   "vigour": {
-    "facebook": {
-      "appId": "1534460276875190",
-      "scope": "public_profile,email",
-      "web": {
-        "version": "v2.5",
-        "src": "//connect.facebook.net/en_NL/sdk.js"
+    "native": {
+      "platforms": {
+        "ios": {
+          "productName": "Facebook Example",
+          "organizationName": "Vigour",
+          "organizationIdentifier": "io.vigour.facebook",
+          "buildNumber": "1",
+          "appIndexPath": "build.html",
+          "appIcon": "assets/img/appIcon.png",
+          "splashScreen": "assets/img/splash.png",
+          "NSAllowsArbitraryLoads": true,
+          "assets": {
+            "assets": true,
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        },
+        "android": {
+          "productName": "Facebook Example",
+          "applicationId": "io.vigour.facebook",
+          "appIndexPath": "build.html",
+          "keystoreFile": "example.keystore",
+          "keystorePassword": "shmexample",
+          "keystoreAlias": "blabla",
+          "assets": {
+            "assets": true,
+            "build.html": true,
+            "build.js": true,
+            "build.css": true
+          }
+        }
       }
     },
     "plugin": {
@@ -74,7 +106,7 @@
           "android:label": "@string/app_name"
         },
         "strings": {
-          "facebook_app_id": "1523994961255055"
+          "facebook_app_id": "441539296031991"
         }
       }
     }
