@@ -1,6 +1,6 @@
 {
   "name": "vigour-facebook",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
