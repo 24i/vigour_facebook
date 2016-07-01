@@ -1,21 +1,10 @@
 {
   "name": "vigour-facebook",
-  "version": "2.0.4",
+  "version": "3.0.0",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
-    "test": "gaston test -r browser -s test/browser/index.js",
-    "build": "cd example && gaston build -s index.js -o ./ -i && pwd",
-    "ios-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms ios",
-    "ios": "npm run build && wrapper build --native.selectedPlatforms ios",
-    "android-test": "cd test && gaston bundle -t -s manual/index.js -o . -i && wrapper build --native.selectedPlatforms android",
-    "durp": "cd example ; pwd",
-    "wex": "npm run durp ; pwd ; wrapper build --native.selectedPlatforms android",
-    "android": "npm run build && pwd && npm run wrap-android",
-    "wrap-android": "wrapper build --native.selectedPlatforms android",
-    "all": "npm run build && wrapper build",
-    "tizentv": "npm run build && wrapper build --native.selectedPlatforms tizentv",
-    "postinstall": "./makelinks.sh vigour-facebook"
+    "test": "echo tests need fixing!"
   },
   "repository": {
     "type": "git",
@@ -23,17 +12,13 @@
   },
   "keywords": [
     "vigour",
-    "wrapper",
-    "native",
-    "plugin",
-    "facebook"
+    "facebook",
+    "web"
   ],
   "author": "Vigour",
   "contributors": [
     "Shawn Inder <shawn@vigour.io>",
-    "Marcus Besjes <marcus@vigour.io>",
-    "Michiel Van Liempt <michiel@vigour.io>",
-    "Alexander van de Werff <alex@vigour.io>"
+    "Marcus Besjes <marcus@vigour.io>"
   ],
   "bugs": {
     "url": "https://github.com/vigour-io/facebook/issues"
@@ -43,84 +28,29 @@
     "node": ">=4.1.2"
   },
   "dependencies": {
-    "npmlog": "^2.0.2",
     "vigour-observable": "^1.0.3",
     "vigour-package": "^1.0.0",
     "vigour-ua": "^1.0.0",
     "vigour-wrapper-bridge": "^1.0.0",
     "envify": "^3.4.0"
   },
-  "devDependencies": {
-    "gaston": "~0.29.10",
-    "vigour-element": "^1.0.1",
-    "vigour-wrapper": "^4.0.0"
-  },
+  "devDependencies": {},
   "license": "MIT",
-  "vigour": {
-    "native": {
-      "platforms": {
-        "ios": {
-          "productName": "Facebook Example",
-          "organizationName": "Vigour",
-          "organizationIdentifier": "io.vigour.facebook",
-          "buildNumber": "1",
-          "appIndexPath": "build.html",
-          "appIcon": "assets/img/appIcon.png",
-          "splashScreen": "assets/img/splash.png",
-          "NSAllowsArbitraryLoads": true,
-          "assets": {
-            "assets": true,
-            "build.html": true,
-            "build.js": true,
-            "build.css": true
-          }
-        },
-        "android": {
-          "productName": "Facebook Example",
-          "applicationId": "io.vigour.facebook",
-          "appIndexPath": "build.html",
-          "keystoreFile": "example.keystore",
-          "keystorePassword": "shmexample",
-          "keystoreAlias": "blabla",
-          "assets": {
-            "assets": true,
-            "build.html": true,
-            "build.js": true,
-            "build.css": true
-          }
+  "browserify": {
+    "transform": [
+      [
+        "envify",
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
         }
-      }
-    },
-    "plugin": {
-      "android": {
-        "className": "io.vigour.plugin.facebook.FacebookPlugin",
-        "instantiation": "new FacebookPlugin(this)",
-        "metadata": {
-          "android:name": "com.facebook.sdk.ApplicationId",
-          "android:value": "@string/facebook_app_id"
-        },
-        "activity": {
-          "android:name": "com.facebook.FacebookActivity",
-          "android:configChanges": "keyboard|keyboardHidden|screenLayout|screenSize|orientation",
-          "android:theme": "@android:style/Theme.Translucent.NoTitleBar",
-          "android:label": "@string/app_name"
-        },
-        "strings": {
-          "facebook_app_id": "441539296031991"
-        }
-      }
-    }
+      ]
+    ]
   },
   "standard": {
     "globals": [
-      "describe",
-      "it",
-      "expect",
-      "before",
-      "after",
-      "beforeEach",
-      "afterEach",
-      "sinon",
       "FB"
     ]
   },
