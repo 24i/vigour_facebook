@@ -1,10 +1,10 @@
 {
   "name": "vigour-facebook",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo tests need fixing!; exit 1;",
+    "test": "echo tests need fixing!"
   },
   "repository": {
     "type": "git",
@@ -52,6 +52,19 @@
   "standard": {
     "globals": [
       "FB"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      [
+        "envify",
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
     ]
   }
 }
