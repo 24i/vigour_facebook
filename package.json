@@ -51,7 +51,8 @@
   },
   "standard": {
     "globals": [
-      "FB"
+      "FB",
+      "facebookConnectPlugin"
     ]
   }
 }
