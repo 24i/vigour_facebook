@@ -49,6 +49,9 @@
     "vigour-doc": "^1.0.5",
     "pre-commit": "^1.1.3"
   },
+  "browser": {
+    "./lib/index.js": "./lib/browser.js",
+  },
   "license": "MIT",
   "browserify": {
     "transform": [
