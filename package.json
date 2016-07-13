@@ -4,7 +4,12 @@
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo tests need fixing!"
+    "test": "node test | tap-difflet && standard",
+    "standard": "standard",
+    "watch": "nodemon test | tap-difflet",
+    "cover": "istanbul cover --report none --print detail test/index.js",
+    "docs": "vdoc",
+    "travis": "npm run cover -s && istanbul report lcov && ((cat coverage/lcov.info | coveralls) || exit 0) && standard"
   },
   "repository": {
     "type": "git",
@@ -34,7 +39,16 @@
     "vigour-ua": "^2.0.0",
     "envify": "^3.4.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^7.0.1",
+    "tap-difflet": "0.4.0",
+    "tape": "4.4.0",
+    "nodemon": "^1.9.1",
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "vigour-doc": "^1.0.5",
+    "pre-commit": "^1.1.3",
+  },
   "license": "MIT",
   "browserify": {
     "transform": [
