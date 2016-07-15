@@ -4,7 +4,7 @@
   "description": "facebook for vigorous apps!",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node test | tap-difflet && standard",
+    "test": "(ducktape; node test) | tap-difflet && standard",
     "standard": "standard",
     "watch": "nodemon test | tap-difflet",
     "cover": "istanbul cover --report none --print detail test/index.js",
@@ -40,6 +40,7 @@
     "envify": "^3.4.0"
   },
   "devDependencies": {
+    "ducktape": "^1.0.0",
     "standard": "^7.0.1",
     "tap-difflet": "0.4.0",
     "tape": "4.4.0",
