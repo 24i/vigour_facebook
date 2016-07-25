@@ -53,8 +53,8 @@
   "license": "MIT",
   "browserify": {
     "transform": [
+      "envify",
       [
-        "envify",
         "babelify",
         {
           "presets": [
